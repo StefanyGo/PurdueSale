@@ -1,0 +1,70 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+	border-style: double;
+	border-width: 5px;
+	border-color: #5F5F5F;
+    box-sizing: border-box;
+	float: center;
+	width: 400px;
+	margin-top: 0px;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 10px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #777;
+    box-sizing: border-box;
+	border-radius: 4px;
+}
+
+button {
+    background-image: linear-gradient(#4FBF4F, #2F8F2F);
+    color: #FFFFFF;
+    padding: 12px 16px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+	border-radius: 4px;
+    width: 75%;
+}
+
+button:hover {
+    opacity: 0.75;
+}
+
+.logobtn {
+	background-color: Transparent;
+	background-image: url('../public/logo.png');
+	background-size: 250px 174px;
+    padding: 0px 0px;
+    width: 250px;
+	height: 174px;
+	float: center;
+	margin-bottom: 0px;
+}
+
+.logobtn:hover {
+    opacity: 1.0;
+}
+
+.cancelbtn {
+    padding: 12px 0px;
+    width: 22%;
+    background-image: linear-gradient(#DF4F4F, #9F2F2F);
+	float: right;
+}
+
+.registerbtn {
+    padding: 16px 20px;
+    width: 100%;
+    background-image: linear-gradient(#4F4FBF, #2F2F9F);
+}
+
+.container {
+    padding: 16px;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html><head>
+  <link rel="stylesheet" href="login.css">
+  <link rel="icon" href="../public/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div align="center">
+    <form action="welcome.html">
+	  <button type="submit" class="logobtn"></button>
+    </form>
+    <div class="container" style="width:350px" align="left">
+      <h2 style="margin-top: 0px; margin-bottom: 30px;" align="center">Login</h2>
+      <label for="email"><b>Purdue Email</b></label>
+      <input id="email_blank" type="text" placeholder="Enter Email" name="email" required="">
+	  <br><br>
+	  <label for="pass"><b>Password</b></label>
+      <input id="password_blank" type="password" placeholder="Enter Password" name="pass" required="">
+	  <br><br>
+      <label>
+        <input type="checkbox" name="remember" align="right"> Remember me</input>
+      </label>
+        
+	  <form action="welcome.html">
+	    <button type="submit" class="cancelbtn">Cancel</button>
+	  </form>
+      <button type="submit" onclick="login()">Login</button>
+      <div align="right"><span class="password"><a href="passwordReset.html">Forgot password?</a></span></div>
+	  <br><br>
+	  <form action="register.html">
+	    <button type="submit" class="registerbtn">Register New Account</button>
+	  </form>
+    </div>
+  </div>
+</body></html>
