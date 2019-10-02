@@ -40,19 +40,18 @@ class App extends Component {
 render() {
   return (
     <div className="App">
-    <BrowserRouter>
-    <Header authenticated={this.state.authenticated} />
-        { this.state.authenticated
-        ? (<Route path="/logout" component={Logout} />
+      <BrowserRouter>
+        <Header authenticated={this.state.authenticated} />
+          { this.state.authenticated
+          ? (<Route path="/logout" component={Logout} />
 
-      )
+            )
 
-        : (
-        <Route path="/login" component={Login} />
-        )
-
-        }
-        </BrowserRouter>
+          : (
+            <Route path="/login" component={Login} />
+            )
+          }
+      </BrowserRouter>
     </div>
   );
 }
