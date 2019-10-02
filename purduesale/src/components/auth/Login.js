@@ -14,11 +14,11 @@ class Login extends Component {
     }
 	
 	redirectWelcome = () => {
-		this.props.history.push('/welcome')
+		this.props.history.push('/')
 	}
 	
 	redirectRegister = () => {
-		this.props.history.push('/register')
+		this.props.history.push('/signup')
 	}
 	
 	redirectHome = () => {
