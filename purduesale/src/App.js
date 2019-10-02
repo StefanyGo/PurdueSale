@@ -39,8 +39,8 @@ class App extends Component {
 
 render() {
   return (
-    <div className="App">
-      <BrowserRouter>
+    <BrowserRouter>
+      <div className="App">
         <Header authenticated={this.state.authenticated} />
           { this.state.authenticated
           ? (<Route path="/logout" component={Logout} />
@@ -51,8 +51,8 @@ render() {
             <Route path="/login" component={Login} />
             )
           }
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
 }
