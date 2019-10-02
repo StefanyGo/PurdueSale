@@ -5,7 +5,7 @@ import logo from './logo.svg';
 import './App.css';
 import Login from './Login.js';
 import {app} from './base';
-
+import Logout from './Logout';
 class App extends Component {
 
   constructor() {
@@ -42,7 +42,7 @@ render() {
       <header authenticated={this.state.authenticated}/>
         <img src={logo} className="App-logo" alt="logo" />
         { this.state.authenticated
-        ? null
+        ? <Logout/>
         : (<Login/>)
         }
         <header/>
