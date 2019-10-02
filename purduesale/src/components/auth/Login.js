@@ -1,7 +1,7 @@
 import './Login.css';
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import {app} from './base';
+import {app} from '../../base';
 
 class Login extends Component {
     constructor(props) {

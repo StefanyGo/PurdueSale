@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import { app } from './base'
+import { app } from '../../base'
 
 class Logout extends Component {
   constructor() {
