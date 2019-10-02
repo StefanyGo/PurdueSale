@@ -1,19 +1,55 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {BrowserRouter} from 'react-router-dom'
+import Route from 'react'
 import logo from './logo.svg';
 import './App.css';
 import Login from './Login.js';
-function App() {
+import {app} from './base';
+
+class App extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      authenticated: false,
+
+    };
+ 
+  }
+
+  componentWillMount() {
+    this.removeAuthListener = app.auth().onAuthStateChanged((user) => {
+        if (user) {
+            this.setState({
+                authenticated: true,
+            })
+        } else {
+          this.setState({
+            authenticated: false,
+        })
+        }
+    }
+    )}
+
+    componentWillUnmount() {
+      this.removeAuthListener();
+    }
+
+render() {
   return (
     <div className="App">
-      <header className="App-header">
+    <BrowserRouter>
+      <header authenticated={this.state.authenticated}/>
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Login/>
-      </header>
+        { this.state.authenticated
+        ? null
+        : (<Login/>)
+        }
+        <header/>
+        </BrowserRouter>
     </div>
   );
+}
 }
 
 export default App;
