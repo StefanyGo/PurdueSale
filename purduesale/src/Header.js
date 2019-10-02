@@ -12,10 +12,15 @@ class Header extends Component {
     return (
       <nav className="pt-navbar">
         <div className="pt-navbar-group pt-align-left">
-          <div className="pt-navbar-heading">Purdue Sale</div>
           {this.props.authenticated
-              ? <a> hi! </a>
-              : null
+              ? (
+                  <div>
+                    <Link to="/logout">Logout</Link>
+                </div>
+              )
+              : <div>
+              <Link to="/login">Login</Link>
+          </div>
           }
         </div>
       </nav>

@@ -8,6 +8,7 @@ class Login extends Component {
         this.state = {
             redirect: false,
         }
+        
         this.authenticate = this.authenticate.bind(this)
     }
 

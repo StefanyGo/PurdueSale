@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter} from 'react-router-dom'
-import Route from 'react'
+import {BrowserRouter, Route} from 'react-router-dom'
 import logo from './logo.svg';
 import './App.css';
 import Login from './Login.js';
@@ -43,13 +42,17 @@ render() {
     <div className="App">
     <BrowserRouter>
     <Header authenticated={this.state.authenticated} />
-      <header authenticated={this.state.authenticated}/>
         <img src={logo} className="App-logo" alt="logo" />
         { this.state.authenticated
-        ? null
-        : (<Login/>)
+        ? (<Route path="/logout" component={Logout} />
+
+      )
+
+        : (
+        <Route path="/login" component={Login} />
+        )
+
         }
-        <header/>
         </BrowserRouter>
     </div>
   );
