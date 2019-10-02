@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom'
-import logo from './logo.svg';
-import './App.css';
-import Login from './Login.js';
-import {app} from './base';
-import Logout from './Logout.js';
-import Header from './Header.js'
 
-import Navbar from './components/layout/Navbar'
+import './App.css';
+import {app} from './base';
+
+import Login from './components/auth/Login.js';
+import Logout from './components/auth/Logout.js';
+
+import { Link } from 'react-router-dom'
+
+import SignedInLinks from './components/navbar/SignedInLinks';
+import SignedOutLinks from './components/navbar/SignedOutLinks';
 
 class App extends Component {
 
@@ -43,17 +46,20 @@ class App extends Component {
 render() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <div className="App">
-        <Header authenticated={this.state.authenticated} />
+      <nav className="nav-wrapper.grey-darken-3">
+        <div className="navbar-container">
+          <Link to='/' className="brand-logo">PurdueSale</Link>
           { this.state.authenticated
-          ? (<Route path="/logout" component={Logout} />
+          ? <SignedInLinks />
+          : <SignedOutLinks />
+          } 
+        </div>
+        </nav>
+      <div className="App">
+          { this.state.authenticated
+          ? (<Route path="/logout" component={Logout} />)
 
-            )
-
-          : (
-            <Route path="/login" component={Login} />
-            )
+          : (<Route path="/login" component={Login} /> )
           }
       </div>
     </BrowserRouter>
