@@ -6,6 +6,9 @@ import Login from './Login.js';
 import {app} from './base';
 import Logout from './Logout.js';
 import Header from './Header.js'
+
+import Navbar from './components/layout/Navbar'
+
 class App extends Component {
 
   constructor() {
@@ -40,6 +43,7 @@ class App extends Component {
 render() {
   return (
     <BrowserRouter>
+      <Navbar />
       <div className="App">
         <Header authenticated={this.state.authenticated} />
           { this.state.authenticated
