@@ -39,7 +39,7 @@ button:hover {
 
 .logobtn {
 	background-color: Transparent;
-	background-image: url('../public/logo.png');
+	background-image: url('./logo.png');
 	background-size: 250px 174px;
     padding: 0px 0px;
     width: 250px;

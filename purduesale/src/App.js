@@ -42,7 +42,6 @@ render() {
     <div className="App">
     <BrowserRouter>
     <Header authenticated={this.state.authenticated} />
-        <img src={logo} className="App-logo" alt="logo" />
         { this.state.authenticated
         ? (<Route path="/logout" component={Logout} />
 
