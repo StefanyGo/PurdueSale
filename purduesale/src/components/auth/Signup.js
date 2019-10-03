@@ -1,11 +1,13 @@
 import './Login.css';
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { signUp } from '../../store/actions/authActions'
 
 class SignUp extends Component {
     state = {
-        firstname: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
     }
@@ -18,7 +20,7 @@ class SignUp extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
+        this.props.signUp(this.state)
     }
     
 	redirectWelcome = () => {
@@ -41,10 +43,10 @@ class SignUp extends Component {
 			    <div className="container" style={{width: "350px"}} align="left">
 			      <h2 style={{marginTop: "0px", marginBottom: "30px"}} align="center">Sign Up</h2>
 			      <label htmlFor="firstname"><b>First Name</b></label>
-			      <input id="firstname" type="text" placeholder="Enter First Name" name="firstname" required="" onChange={this.handleChange}/>
+			      <input id="firstName" type="text" placeholder="Enter First Name" required="" onChange={this.handleChange}/>
 			      <br/><br/>
                   <label htmlFor="lastname"><b>Last Name</b></label>
-			      <input id="lastname" type="text" placeholder="Enter Last Name" name="lastname" required="" onChange={this.handleChange}/>
+			      <input id="lastName" type="text" placeholder="Enter Last Name" required="" onChange={this.handleChange}/>
 			      <br/><br/>
                   <label htmlFor="email"><b>Purdue Email</b></label>
 			      <input id="email" type="text" placeholder="Enter Email" name="email" required="" onChange={this.handleChange}/>
@@ -64,4 +66,16 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signUp: (newUser) => dispatch(signUp(newUser))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
