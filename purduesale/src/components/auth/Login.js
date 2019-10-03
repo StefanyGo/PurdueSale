@@ -38,10 +38,9 @@ class Login extends Component {
                     // no user, create one
                     return app.auth().createUserWithEmailAndPassword(email,password);
                 } else {
-
+                    console.log("wow");
                     return app.auth().signInWithEmailAndPassword(email,password);
 
-                    this.loginForm.reset();
                     // sign in
                 }
             }).then((user) => {
