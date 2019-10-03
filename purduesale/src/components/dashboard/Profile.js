@@ -19,6 +19,12 @@ const Profile = (props) => {
         <div>
             The number of items you have sold is: {props.profile.soldProducts}
         </div>
+        <br></br>
+        <br></br>
+        <span className="card-title">Manage Account</span>
+            <div >
+            <div><span class="password"><a href="resetpass" >Reset password</a></span></div>
+            </div>
     </div>
     ) 
     : 

@@ -7,9 +7,9 @@ import Navbar from './components/navbar/Navbar';
 import Login from './components/auth/Login.js';
 import Logout from './components/auth/Logout.js';
 import SignUp from './components/auth/Signup';
-import Dashboard from './components/dashboard/Dashboard';
 import Profile from './components/dashboard/Dashboard'
 import ForgotPass from './components/auth/ForgotPass';
+import ResetPassword from './components/auth/ResetPassword';
 
 class App extends Component {
 
@@ -33,6 +33,7 @@ render() {
           <Route path='/signup' component={SignUp} />
           <Route path='/profile' component={Profile} />
           <Route path='/forgotpass' component={ForgotPass} />
+          <Route path='/resetpass' component={ResetPassword} />
         </Switch>
       </div>
     </BrowserRouter>

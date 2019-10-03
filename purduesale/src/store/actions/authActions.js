@@ -99,7 +99,6 @@ export const signUp = (newUser) => {
 
 }
 
-
 export const forgotPassword = (email) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
@@ -112,5 +111,26 @@ export const forgotPassword = (email) => {
             dispatch({ type: 'FORGET_PASSWORD_ERROR' });
             swal("Oh no!", error.message, "error")
         });
+    }
+}
+
+const reauthenticate = (firebase, currentPassword) => {
+    var user = firebase.auth().currentUser;
+    var cred = firebase.auth.EmailAuthProvider.credential(
+        user.email, currentPassword);
+    return user.reauthenticateWithCredential(cred);
+  }
+
+export const resetPassword = (pass1, pass2) => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+        reauthenticate(firebase, pass1).then(() => {
+            var user = firebase.auth().currentUser;
+            user.updatePassword(pass2).then(() => {
+            swal("Sucess!", "Password successfully changed", "success")
+          }).catch((error) => { swal("Oh no!", error.message, "error")
+        });
+        }).catch((error) => { swal("Oh no!", error.message, "error")
+      });
     }
 }
