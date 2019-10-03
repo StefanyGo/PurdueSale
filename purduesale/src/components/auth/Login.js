@@ -46,13 +46,13 @@ class Login extends Component {
 			      <label htmlFor="pass"><b>Password</b></label>
 			      <input id="password" type="password" placeholder="Enter Password" name="pass" required="" onChange={this.handleChange}/>
 			      <br/><br/>
-			      <div>
-			        <input id="remember" type="checkbox" name="rmbr" align="right" />
-			        <label>Remember me</label>
-			      </div>
+			      <label>
+			        <input id="remember" type="checkbox" name="rmbr" />
+			        <span style={{paddingLeft: "25px"}}>Remember me</span>
+			      </label>
 
-			      <button class="cancelbtn" onClick={this.redirectWelcome}>Cancel</button>
 			      <button type="submit">Login</button>
+			      <button class="cancelbtn" onClick={this.redirectWelcome} align="right">Cancel</button>
                   <div className="red-text center">
                       { authError ? <p>{authError}</p> : null }
                   </div>
