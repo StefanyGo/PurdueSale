@@ -6,8 +6,8 @@ class SignUp extends Component {
     state = {
         firstname: '',
         lastname: '',
-        password1: '',
-        password2: '',
+        email: '',
+        password: '',
     }
 	
 	handleChange = (e) => {
@@ -46,14 +46,14 @@ class SignUp extends Component {
                   <label htmlFor="lastname"><b>Last Name</b></label>
 			      <input id="lastname" type="text" placeholder="Enter Last Name" name="lastname" required="" onChange={this.handleChange}/>
 			      <br/><br/>
-			      <label htmlFor="pass"><b>New Password</b></label>
-			      <input id="password1" type="password" placeholder="Enter New Password" name="pass1" required="" onChange={this.handleChange}/>
+                  <label htmlFor="email"><b>Purdue Email</b></label>
+			      <input id="email" type="text" placeholder="Enter Email" name="email" required="" onChange={this.handleChange}/>
 			      <br/><br/>
-			      <label htmlFor="pass"><b>Retype Password</b></label>
-			      <input id="password2" type="password" placeholder="Retype Password" name="pass2" required="" onChange={this.handleChange}/>
+			      <label htmlFor="pass"><b>New Password</b></label>
+			      <input id="password" type="password" placeholder="Enter New Password" name="pass" required="" onChange={this.handleChange}/>
 			      <br/><br/>
 			      <button class="cancelbtn" onClick={this.redirectWelcome}>Cancel</button>
-			      <button type="submit">Create Account</button>
+			      <button type="submit">SignUp</button>
 			      <br/><br/><br/>
 			      <button class="registerbtn" onClick={this.redirectLogin}>Login With Existing Account</button>
 			    </div>
