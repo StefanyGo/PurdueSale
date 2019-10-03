@@ -53,7 +53,7 @@ class SignUp extends Component {
 			      <input id="password" type="password" placeholder="Enter New Password" name="pass" required="" onChange={this.handleChange}/>
 			      <br/><br/>
 			      <button class="cancelbtn" onClick={this.redirectWelcome}>Cancel</button>
-			      <button type="submit">SignUp</button>
+			      <button type="submit">Sign Up</button>
 			      <br/><br/><br/>
 			      <button class="registerbtn" onClick={this.redirectLogin}>Login With Existing Account</button>
 			    </div>
