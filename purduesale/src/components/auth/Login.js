@@ -7,11 +7,18 @@ class Login extends Component {
     state = {
         email: '',
         password: '',
+        remember: false
     }
 	
 	handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
+        })
+    }
+    
+    handleCheckmark = (e) => {
+        this.setState({
+            [e.target.id]: e.target.checked
         })
     }
 
@@ -44,10 +51,10 @@ class Login extends Component {
 			      <input id="email" type="text" placeholder="Enter Email" name="email" required="" onChange={this.handleChange}/>
 			      <br/><br/>
 			      <label htmlFor="pass"><b>Password</b></label>
-			      <input id="password" type="password" placeholder="Enter Password" name="pass" required="" onChange={this.handleChange}/>
+			      <input id="password" type="password" placeholder="Enter Password" name="pass" required="" checked="unchecked" onChange={this.handleChange}/>
 			      <br/><br/>
 			      <label>
-			        <input id="remember" type="checkbox" name="rmbr" />
+			        <input id="remember" type="checkbox" name="rmbr" onChange={this.handleCheckmark}/>
 			        <span style={{paddingLeft: "25px"}}>Remember me</span>
 			      </label>
 

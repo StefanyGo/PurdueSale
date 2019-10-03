@@ -9,12 +9,19 @@ class SignUp extends Component {
         firstName: '',
         lastName: '',
         email: '',
-        password: '',
+		password: '',
+		remember: false
     }
 	
 	handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
+        })
+	}
+
+	handleCheckmark = (e) => {
+        this.setState({
+            [e.target.id]: e.target.checked
         })
     }
 
@@ -55,7 +62,7 @@ class SignUp extends Component {
 			      <input id="password" type="password" placeholder="Enter New Password" name="pass" required="" onChange={this.handleChange}/>
 			      <br/><br/>
 			      <label>
-			        <input id="remember" type="checkbox" name="rmbr" />
+			        <input id="remember" type="checkbox" name="rmbr" onChange={this.handleCheckmark}/>
 			        <span style={{paddingLeft: "25px"}}>Remember me</span>
 			      </label>
 			      <button type="submit">Sign Up</button>
