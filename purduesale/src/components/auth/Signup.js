@@ -9,12 +9,19 @@ class SignUp extends Component {
         firstName: '',
         lastName: '',
         email: '',
-        password: '',
+		password: '',
+		remember: false
     }
 	
 	handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
+        })
+	}
+
+	handleCheckmark = (e) => {
+        this.setState({
+            [e.target.id]: e.target.checked
         })
     }
 
@@ -54,8 +61,12 @@ class SignUp extends Component {
 			      <label htmlFor="pass"><b>New Password</b></label>
 			      <input id="password" type="password" placeholder="Enter New Password" name="pass" required="" onChange={this.handleChange}/>
 			      <br/><br/>
-			      <button class="cancelbtn" onClick={this.redirectWelcome}>Cancel</button>
+			      <label>
+			        <input id="remember" type="checkbox" name="rmbr" onChange={this.handleCheckmark}/>
+			        <span style={{paddingLeft: "25px"}}>Remember me</span>
+			      </label>
 			      <button type="submit">Sign Up</button>
+			      <button class="cancelbtn" onClick={this.redirectWelcome}>Cancel</button>
 			      <br/><br/><br/>
 			      <button class="registerbtn" onClick={this.redirectLogin}>Login With Existing Account</button>
 			    </div>
