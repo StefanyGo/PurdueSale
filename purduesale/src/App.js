@@ -11,6 +11,7 @@ import Profile from './components/dashboard/Dashboard'
 import ForgotPass from './components/auth/ForgotPass';
 import ResetPassword from './components/auth/ResetPassword';
 import EditBio from './components/auth/EditBio';
+import UserList from './components/dashboard/UserList';
 
 class App extends Component {
 
@@ -36,6 +37,7 @@ render() {
           <Route path='/forgotpass' component={ForgotPass} />
           <Route path='/resetpass' component={ResetPassword} />
           <Route path='/editbio' component={EditBio} />
+          <Route path='/userlist' component={UserList} />
         </Switch>
       </div>
     </BrowserRouter>
