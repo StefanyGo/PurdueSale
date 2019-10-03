@@ -3,11 +3,12 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
 import './App.css';
 
+import Navbar from './components/navbar/Navbar';
 import Login from './components/auth/Login.js';
 import Logout from './components/auth/Logout.js';
-
-import Navbar from './components/navbar/Navbar';
 import SignUp from './components/auth/Signup';
+import Dashboard from './components/dashboard/Dashboard';
+import Profile from './components/dashboard/Dashboard'
 
 class App extends Component {
 
@@ -29,6 +30,7 @@ render() {
           <Route path='/login' component={Login} />
           <Route path='/logout' component={Logout} />
           <Route path='/signup' component={SignUp} />
+          <Route path='/profile' component={Profile} />
         </Switch>
       </div>
     </BrowserRouter>
