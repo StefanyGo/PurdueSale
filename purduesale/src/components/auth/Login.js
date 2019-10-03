@@ -28,7 +28,7 @@ class Login extends Component {
 
     authenticate(e) {
         e.preventDefault();
-
+            // this is backup
             const email = this.emailInput.value;
             const password = this.passwordInput.value;
 
