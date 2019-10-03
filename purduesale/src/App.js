@@ -6,6 +6,8 @@ import {app} from './base';
 
 import Login from './components/auth/Login.js';
 import Logout from './components/auth/Logout.js';
+import Register from './components/auth/Register.js';
+
 
 import { Link } from 'react-router-dom'
 

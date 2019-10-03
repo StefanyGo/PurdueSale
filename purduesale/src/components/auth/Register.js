@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import {app} from '../../base';
 
-class Login extends Component {
+class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -38,9 +38,7 @@ class Login extends Component {
                     // no user, create one
                     return app.auth().createUserWithEmailAndPassword(email,password);
                 } else {
-                    console.log("wow");
-                    return app.auth().signInWithEmailAndPassword(email,password);
-
+                    // user already exists
                     // sign in
                 }
             }).then((user) => {
@@ -73,11 +71,9 @@ class Login extends Component {
 			      <label for="pass"><b>Password</b></label>
 			      <input id="password_blank" type="password" placeholder="Enter Password" name="pass" pattern="[a-zA-Z0-9_-]{6,12}" title="password must include 6-12 letters, uppercase, and a number." required="" ref={(input) => {this.passwordInput = input}}/>
 			      <br/><br/>
-			      <div>
-			        <input id="remember" type="checkbox" name="rmbr" align="right" />
-			        <label>Remember me</label>
-			      </div>
-
+                  <label for="pass"><b>Confirm Password</b></label>
+			      <input id="password_blank" type="password" placeholder="Enter Password" name="confirm pass" pattern="[a-zA-Z0-9_-]{6,12}" title="password must include 6-12 letters, uppercase, and a number." required="" ref={(input) => {this.passwordInput = input}}/>
+			      <br/><br/>
 			      <button class="cancelbtn" onClick={this.redirectWelcome}>Cancel</button>
 			      <button type="submit">Login</button>
 			      <div align="right"><span class="password"><a href="resetpassword">Forgot password?</a></span></div>
@@ -91,4 +87,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default Register;
