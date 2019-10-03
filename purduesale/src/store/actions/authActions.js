@@ -1,3 +1,5 @@
+import swal from 'sweetalert'
+
 export const signIn = (credentials) => {
     return (dispatch, getState, {getFirebase}) => {
         const firebase = getFirebase();
@@ -95,4 +97,20 @@ export const signUp = (newUser) => {
 
     }
 
+}
+
+
+export const forgotPassword = (email) => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+
+        firebase.auth().sendPasswordResetEmail(email)
+        .then(() => {
+            dispatch({ type: 'FORGET_PASSWORD_SUCCESS' });
+            swal("Password reset email has been sent")
+        }, (error) => {
+            dispatch({ type: 'FORGET_PASSWORD_ERROR' });
+            swal("Oh no!", error.message, "error")
+        });
+    }
 }
