@@ -14,6 +14,9 @@ const Profile = (props) => {
             Your registered email address is: {props.profile.email}
         </div>
         <div>
+            Your bio is: {props.profile.bio}
+        </div>
+        <div>
             The number of items you are selling is: {props.profile.sellingProducts}
         </div>
         <div>
@@ -24,6 +27,7 @@ const Profile = (props) => {
         <span className="card-title">Manage Account</span>
             <div >
             <div><span class="password"><a href="resetpass" >Reset password</a></span></div>
+            <div><a href="editbio" >Update Bio</a></div>
             </div>
     </div>
     ) 
