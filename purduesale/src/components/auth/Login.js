@@ -52,7 +52,7 @@ class Login extends Component {
 			    <div className="container" style={{width: "350px"}} align="left">
 			      <h2 style={{marginTop: "0px", marginBottom: "30px"}} align="center">Login</h2>
 			      <label htmlFor="email"><b>Purdue Email</b></label>
-			      <input id="email" type="text" placeholder="Enter Email" name="email" required="" onChange={this.handleChange}/>
+			      <input id="email" type="text" placeholder="Enter Email" name="email" required="" pattern="(\.?[a-z0-9]){5,}@purdue\.edu$" title="Must enter a valid Purdue email to sign in." onChange={this.handleChange}/>
 			      <br/><br/>
 			      <label htmlFor="pass"><b>Password</b></label>
 			      <input id="password" type="password" placeholder="Enter Password" name="pass" required="" checked="unchecked" onChange={this.handleChange}/>
