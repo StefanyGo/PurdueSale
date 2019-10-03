@@ -7,15 +7,20 @@ const Profile = (props) => {
     ( <div >
         <span className="card-title">My Profile</span>
             <div >
-                Hi, {props.profile.firstName}!
+                Hi, {props.profile.firstName} {props.profile.lastName}!
             </div>
         <br></br>
         <div>
             Your registered email address is: {props.profile.email}
         </div>
+        <br></br>
         <div>
-            Your bio is: {props.profile.bio}
+            Bio 
         </div>
+        <div>
+            {props.profile.bio}
+        </div>
+        <br></br>
         <div>
             The number of items you are selling is: {props.profile.sellingProducts}
         </div>
