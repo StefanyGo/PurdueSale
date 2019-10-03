@@ -19,6 +19,18 @@ class Login extends Component {
         e.preventDefault();
         this.props.signIn(this.state)
     }
+    
+	redirectWelcome = () => {
+		this.props.history.push('/')
+	}
+	
+	redirectRegister = () => {
+		this.props.history.push('/signup')
+	}
+	
+	redirectHome = () => {
+		this.props.history.push('/home')
+	}
 
     render() {
         const { authError } = this.props;
@@ -46,7 +58,7 @@ class Login extends Component {
                   </div>
 			      <div align="right"><span class="password"><a href="resetpassword">Forgot password?</a></span></div>
 			      <br/><br/>
-			      <button class="registerbtn" >Register New Account</button>
+			      <button class="registerbtn" onClick={this.redirectRegister}>Register New Account</button>
 			    </div>
 			  </form>
 			</div>

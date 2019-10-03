@@ -20,6 +20,18 @@ class SignUp extends Component {
         e.preventDefault();
         console.log(this.state)
     }
+    
+	redirectWelcome = () => {
+		this.props.history.push('/')
+	}
+	
+	redirectLogin = () => {
+		this.props.history.push('/login')
+	}
+	
+	redirectHome = () => {
+		this.props.history.push('/home')
+	}
 
     render() {
         return (
@@ -41,10 +53,9 @@ class SignUp extends Component {
 			      <input id="password2" type="password" placeholder="Retype Password" name="pass2" required="" onChange={this.handleChange}/>
 			      <br/><br/>
 			      <button class="cancelbtn" onClick={this.redirectWelcome}>Cancel</button>
-			      <button type="submit">Login</button>
-			      <div align="right"><span class="password"><a href="resetpassword">Forgot password?</a></span></div>
-			      <br/><br/>
-			      <button class="registerbtn" >Register New Account</button>
+			      <button type="submit">Create Account</button>
+			      <br/><br/><br/>
+			      <button class="registerbtn" onClick={this.redirectLogin}>Login With Existing Account</button>
 			    </div>
 			  </form>
 			</div>
