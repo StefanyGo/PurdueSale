@@ -33,6 +33,7 @@ const Profile = (props) => {
             <div >
             <div><span class="password"><a href="resetpass" >Reset password</a></span></div>
             <div><a href="editbio" >Update Bio</a></div>
+            <div><a href="editimgurl" >Update Img</a></div>
             </div>
     </div>
     ) 

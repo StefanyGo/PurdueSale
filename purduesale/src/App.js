@@ -14,6 +14,7 @@ import EditBio from './components/auth/EditBio';
 import UserList from './components/dashboard/UserList';
 import UserDetails from './components/dashboard/UserDetails';
 import Faq from './components/dashboard/Faq';
+import EditImgUrl from './components/auth/EditImgUrl';
 
 class App extends Component {
 
@@ -40,6 +41,7 @@ render() {
           <Route path='/forgotpass' component={ForgotPass} />
           <Route path='/resetpass' component={ResetPassword} />
           <Route path='/editbio' component={EditBio} />
+          <Route path='/editimgurl' component={EditImgUrl} />
           <Route path='/userlist' component={UserList} />
           <Route path='/user/:id' component={UserDetails} />
         </Switch>
