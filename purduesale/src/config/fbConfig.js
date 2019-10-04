@@ -1,6 +1,9 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
 
-const firebaseConfig = {
+//Initialize firebase
+var config = {
     apiKey: "AIzaSyD2H690CHZ83tFmNyuLf1CWMGYl_wYm8nE",
     authDomain: "purduesale-f3832.firebaseapp.com",
     databaseURL: "https://purduesale-f3832.firebaseio.com",
@@ -11,8 +14,7 @@ const firebaseConfig = {
     measurementId: "G-MT8X9B14NL"
   };
 
-const app = firebase.initializeApp(firebaseConfig);
-  // Get a reference to the database service
-  const database = firebase.database();
+firebase.initializeApp(config);
+firebase.firestore().settings({ timestampsInSnapshots:true });
 
-  export {app, database};
+export default firebase;
