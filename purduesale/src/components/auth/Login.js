@@ -25,6 +25,7 @@ class Login extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.signIn(this.state)
+        this.props.history.push('/profile')
     }
     
 	redirectWelcome = () => {

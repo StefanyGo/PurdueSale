@@ -23,6 +23,7 @@ class EditImgUrl extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.editImgUrl(this.state.imgUrl)
+        this.props.history.push('/profile')
     }
     
 	redirectWelcome = () => {
