@@ -28,6 +28,7 @@ class SignUp extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.signUp(this.state)
+        this.props.history.push('/profile')
     }
     
 	redirectWelcome = () => {
