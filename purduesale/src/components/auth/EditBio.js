@@ -39,7 +39,7 @@ class EditBio extends Component {
                   <label><b>New Bio</b></label>
 			      <input id="bio" type="text" placeholder="Enter New Bio" name="bio" required="" onChange={this.handleChange}/>
 			      <br/><br/>
-			      <button type="submit">Reset Password</button>
+			      <button type="submit">Edit Bio</button>
 			      <button class="cancelbtn" onClick={this.redirectWelcome} align="right">Cancel</button>
 			    </div>
 			  </form>
