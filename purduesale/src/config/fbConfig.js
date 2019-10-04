@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import 'firebase/storage'
 
 //Initialize firebase
 var config = {
@@ -15,6 +16,7 @@ var config = {
   };
 
 firebase.initializeApp(config);
-firebase.firestore().settings({ timestampsInSnapshots:true });
 
-export default firebase;
+const storage = firebase.storage();
+
+export {storage, firebase as default}

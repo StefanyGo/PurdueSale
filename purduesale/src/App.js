@@ -37,12 +37,14 @@ render() {
           <Route path='/logout' component={Logout} />
           <Route path='/signup' component={SignUp} />
           <Route path='/faq' component={Faq} />
+          <Route path='/user/faq' component={Faq} />
           <Route path='/profile' component={Profile} />
           <Route path='/forgotpass' component={ForgotPass} />
           <Route path='/resetpass' component={ResetPassword} />
           <Route path='/editbio' component={EditBio} />
           <Route path='/editimgurl' component={EditImgUrl} />
           <Route path='/userlist' component={UserList} />
+          <Route path='/user/userlist' component={UserList} />
           <Route path='/user/:id' component={UserDetails} />
         </Switch>
       </div>

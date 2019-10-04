@@ -23,6 +23,7 @@ class EditBio extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.editBio(this.state.bio)
+        this.props.history.push('/profile')
     }
     
 	redirectWelcome = () => {
