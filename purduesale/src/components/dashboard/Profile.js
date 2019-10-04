@@ -7,12 +7,20 @@ const Profile = (props) => {
     ( <div >
         <span className="card-title">My Profile</span>
             <div >
-                Hi, {props.profile.firstName}!
+                Hi, {props.profile.firstName} {props.profile.lastName}!
             </div>
         <br></br>
         <div>
             Your registered email address is: {props.profile.email}
         </div>
+        <br></br>
+        <div>
+            Bio 
+        </div>
+        <div>
+            {props.profile.bio}
+        </div>
+        <br></br>
         <div>
             The number of items you are selling is: {props.profile.sellingProducts}
         </div>
@@ -24,6 +32,7 @@ const Profile = (props) => {
         <span className="card-title">Manage Account</span>
             <div >
             <div><span class="password"><a href="resetpass" >Reset password</a></span></div>
+            <div><a href="editbio" >Update Bio</a></div>
             </div>
     </div>
     ) 
