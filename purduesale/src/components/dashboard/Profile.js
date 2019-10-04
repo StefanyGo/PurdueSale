@@ -2,13 +2,17 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 
+import userlogo1 from './userlogo1.png'
+
 const Profile = (props) => {
+
     const links = props.auth.uid ? 
     ( <div >
         <span className="card-title">My Profile</span>
-            <div >
-                Hi, {props.profile.firstName} {props.profile.lastName}!
-            </div>
+        <div >
+            Hi, {props.profile.firstName} {props.profile.lastName}!
+        </div>
+        <img className="Avatar" src={props.profile.imageUrl || userlogo1} alt="UserLogo" width="200" height="150" />
         <br></br>
         <div>
             Your registered email address is: {props.profile.email}
@@ -42,6 +46,7 @@ const Profile = (props) => {
         Please login!
     </div> )
     ;
+    
     return (
         <div className="container section project-details">
             <div className="card z-depth-0s">
