@@ -59,7 +59,7 @@ class SignUp extends Component {
 			      <input id="email" type="text" placeholder="Enter Email" pattern="(\.?[a-z0-9]){5,}@purdue\.edu$" title="Must have a valid Purdue email to sign up." name="email" required="" onChange={this.handleChange}/>
 			      <br/><br/>
 			      <label htmlFor="pass"><b>New Password</b></label>
-			      <input id="password" type="password" placeholder="Enter New Password" name="pass" required="" onChange={this.handleChange}/>
+			      <input id="password" type="password" placeholder="Enter New Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Must have 8 characters, at least one letter and one number." name="pass" required="" onChange={this.handleChange}/>
 			      <br/><br/>
 			      <label>
 			        <input id="remember" type="checkbox" name="rmbr" onChange={this.handleCheckmark}/>
