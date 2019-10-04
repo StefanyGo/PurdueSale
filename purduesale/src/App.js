@@ -13,6 +13,7 @@ import ResetPassword from './components/auth/ResetPassword';
 import EditBio from './components/auth/EditBio';
 import UserList from './components/dashboard/UserList';
 import UserDetails from './components/dashboard/UserDetails';
+import Faq from './components/dashboard/Faq';
 
 class App extends Component {
 
@@ -34,6 +35,7 @@ render() {
           <Route path='/login' component={Login} />
           <Route path='/logout' component={Logout} />
           <Route path='/signup' component={SignUp} />
+          <Route path='/faq' component={Faq} />
           <Route path='/profile' component={Profile} />
           <Route path='/forgotpass' component={ForgotPass} />
           <Route path='/resetpass' component={ResetPassword} />
