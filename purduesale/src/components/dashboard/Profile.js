@@ -8,28 +8,37 @@ const Profile = (props) => {
 
     const links = props.auth.uid ? 
     ( <div >
-        <span className="card-title">My Profile</span>
-        <div >
-            Hi, {props.profile.firstName} {props.profile.lastName}!
+        <span className="card-title" style={{fontSize: 35}}>My Profile</span><br/>
+        <div style={{textDecorationLine: 'underline', fontSize: 18}}>
+            {props.profile.firstName} {props.profile.lastName}
         </div>
         <img className="Avatar" src={props.profile.imageUrl || userlogo1} alt="UserLogo" width="200" height="150" />
         <br></br>
-        <div>
-            Your registered email address is: {props.profile.email}
+        <div style={{fontWeight: 'bold'}}>
+            Your registered email address is: 
         </div>
-        <br></br>
         <div>
+            {props.profile.email}
+        </div>
+        <br/><br/>
+        <div style={{fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline'}}>
             Bio 
         </div>
-        <div>
+        <div style={{whiteSpace: 'pre-wrap', borderStyle: 'solid', borderWidth: '1px', borderColor: '#9F9F9F'}}>
             {props.profile.bio}
         </div>
-        <br></br>
-        <div>
-            The number of items you are selling is: {props.profile.sellingProducts}
+        <br/><br/>
+        <div style={{fontWeight: 'bold'}}>
+            The number of items you are selling is: 
         </div>
         <div>
-            The number of items you have sold is: {props.profile.soldProducts}
+            {props.profile.sellingProducts}
+        </div><br/>
+        <div style={{fontWeight: 'bold'}}>
+            The number of items you have sold is: 
+        </div>
+        <div>
+            {props.profile.soldProducts}
         </div>
         <br></br>
         <br></br>
@@ -37,7 +46,7 @@ const Profile = (props) => {
             <div >
             <div><span className="password"><a href="resetpass" >Reset password</a></span></div>
             <div><a href="editbio" >Update Bio</a></div>
-            <div><a href="editimgurl" >Update Img</a></div>
+            <div><a href="editimgurl" >Update Profile Picture</a></div>
             </div>
     </div>
     ) 
@@ -48,7 +57,7 @@ const Profile = (props) => {
     ;
     
     return (
-        <div className="container section project-details">
+        <div className="container section project-details" style={{marginTop: '20px'}}>
             <div className="card z-depth-0s">
                 <div className="card-content">
                 { links }
