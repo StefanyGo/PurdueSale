@@ -44,7 +44,7 @@ const Profile = (props) => {
         <br></br>
         <span className="card-title">Manage Account</span>
             <div >
-            <div><span className="password"><a href="resetpass" >Reset password</a></span></div>
+            <div><span className="password"><a href="resetpass" >Reset Password</a></span></div>
             <div><a href="editbio" >Update Bio</a></div>
             <div><a href="editimgurl" >Update Profile Picture</a></div>
             </div>
