@@ -3,19 +3,28 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { addNewProduct } from '../../store/actions/accountActions'
 
+const productTags = ["Furniture", "Textbooks", "Electronics", "Office Supplies", "Tools", "Clothes", "Food", "Transportation", "Other"];
+
+export function getProductTags() {
+	return productTags;
+}
+
 class PostProduct extends Component {
     state = {
-        productName: '',
-		description: ''
+        productName: "",
+		description: "",
+		tag: "Select a tag:"
 	}
 	errors = {
 		productName: false,
-		description: false
+		description: false,
+		tag: false
 	}
 
-	errorUpdate(productName, description) {
-		this.errors["productName"] = productName.length === 0;
-		this.errors["description"] = description.length === 0;
+	errorUpdate(productName, description, tag) {
+		this.errors["productName"] = (productName.length === 0);
+		this.errors["description"] = (description.length === 0);
+		this.errors["tag"] = (tag === "Select a tag:");
 		this.forceUpdate();
 	}
 	
@@ -27,7 +36,7 @@ class PostProduct extends Component {
 
     handleSubmit = (e) => {
 		e.preventDefault();
-		this.errorUpdate(this.state.productName, this.state.description);
+		this.errorUpdate(this.state.productName, this.state.description, this.state.tag);
 		var safe = true;
 		Object.entries(this.errors).forEach(function([item, value]) {
 			if (value === true)
@@ -67,6 +76,14 @@ class PostProduct extends Component {
 			      <textarea id="description" placeholder="Enter Product Description" name="prodDesc" required="" style={{resize: "none", maxHeight: "100px", minHeight: "100px"}} onChange={this.handleChange}/>
 				  {this.errors["description"] ? <span style={{color: "red"}}>Please enter a product description.</span> : ''}
 			      <br/><br/>
+				  <div>
+				  <select id="tag" name="tagSelect" value="Select a tag:">
+    				{getProductTags().map((e, key) => {
+        			  return <option key={key} value={e.value}>{e}</option>;
+    				})}
+				  </select>
+				  </div>
+				  {this.errors["tag"] ? <span style={{color: "red"}}>Please select a tag to describe your product.</span> : ''}
 			      <button type="submit">Submit</button>
 			      <button className="cancelbtn" onClick={this.redirectHome}>Cancel</button>
 			    </div>
