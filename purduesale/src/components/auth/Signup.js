@@ -1,6 +1,5 @@
 import './Login.css';
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { signUp } from '../../store/actions/authActions'
 
@@ -46,7 +45,7 @@ class SignUp extends Component {
     render() {
         return (
 			<div align="center">
-			  <button class="logobtn" onClick={this.redirectWelcome}></button>
+			  <button className="logobtn" onClick={this.redirectWelcome}></button>
 			  <form onSubmit={this.handleSubmit} className="white">   
 			    <div className="container" style={{width: "350px"}} align="left">
 			      <h2 style={{marginTop: "0px", marginBottom: "30px"}} align="center">Sign Up</h2>
@@ -57,7 +56,7 @@ class SignUp extends Component {
 			      <input id="lastName" type="text" placeholder="Enter Last Name" required="" onChange={this.handleChange}/>
 			      <br/><br/>
                   <label htmlFor="email"><b>Purdue Email</b></label>
-			      <input id="email" type="text" placeholder="Enter Email" pattern="(\.?[a-z0-9]){5,}@purdue\.edu$" title="Must have a valid Purdue email to sign up." name="email" required="" onChange={this.handleChange}/>
+			      <input id="email" type="text" placeholder="Enter Email" pattern="(\.?[a-z0-9]){1,}@purdue\.edu$" title="Must have a valid Purdue email to sign up." name="email" required="" onChange={this.handleChange}/>
 			      <br/><br/>
 			      <label htmlFor="pass"><b>New Password</b></label>
 			      <input id="password" type="password" placeholder="Enter New Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Must have 8 characters, at least one letter and one number." name="pass" required="" onChange={this.handleChange}/>
@@ -67,9 +66,9 @@ class SignUp extends Component {
 			        <span style={{paddingLeft: "25px"}}>Remember me</span>
 			      </label>
 			      <button type="submit">Sign Up</button>
-			      <button class="cancelbtn" onClick={this.redirectWelcome}>Cancel</button>
+			      <button className="cancelbtn" onClick={this.redirectWelcome}>Cancel</button>
 			      <br/><br/><br/>
-			      <button class="registerbtn" onClick={this.redirectLogin}>Login With Existing Account</button>
+			      <button className="registerbtn" onClick={this.redirectLogin}>Login With Existing Account</button>
 			    </div>
 			  </form>
 			</div>

@@ -7,6 +7,7 @@ import Navbar from './components/navbar/Navbar';
 import Login from './components/auth/Login.js';
 import Logout from './components/auth/Logout.js';
 import SignUp from './components/auth/Signup';
+import PostProduct from './components/dashboard/PostProduct';
 import Profile from './components/dashboard/Dashboard'
 import ForgotPass from './components/auth/ForgotPass';
 import ResetPassword from './components/auth/ResetPassword';
@@ -37,6 +38,7 @@ render() {
           <Route path='/logout' component={Logout} />
           <Route path='/signup' component={SignUp} />
           <Route path='/faq' component={Faq} />
+          <Route path='/postproduct' component={PostProduct} />
           <Route path='/user/faq' component={Faq} />
           <Route path='/profile' component={Profile} />
           <Route path='/forgotpass' component={ForgotPass} />
