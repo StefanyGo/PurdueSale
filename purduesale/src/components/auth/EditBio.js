@@ -38,7 +38,7 @@ class EditBio extends Component {
 			    <div className="container" style={{width: "350px"}} align="left">
 			      <h2 style={{marginTop: "0px", marginBottom: "30px"}} align="center">Edit Bio</h2>
                   <label><b>New Bio</b></label>
-			      <input id="bio" type="text" placeholder="Enter New Bio" name="bio" required="" onChange={this.handleChange}/>
+			      <textarea id="bio" placeholder="Enter New Bio" name="bio" required="" style={{resize: "none", maxHeight: "100px", minHeight: "100px"}} onChange={this.handleChange}/>
 			      <br/><br/>
 			      <button type="submit">Edit Bio</button>
 			      <button className="cancelbtn" onClick={this.redirectWelcome} align="right">Cancel</button>

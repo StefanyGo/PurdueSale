@@ -60,11 +60,11 @@ class Login extends Component {
 			      </label>
 
 			      <button type="submit">Login</button>
-			      <button class="cancelbtn" onClick={this.redirectWelcome} align="right">Cancel</button>
+			      <button className="cancelbtn" onClick={this.redirectWelcome} align="right">Cancel</button>
                   <div className="red-text center">
                       { authError ? <p>{authError}</p> : null }
                   </div>
-			      <div align="right"><span class="password"><a href={'/forgotpass'} >Forgot password?</a></span></div>
+			      <div align="right"><span className="password"><a href={'/forgotpass'} >Forgot password?</a></span></div>
 			      <br/><br/>
 			      <button className="registerbtn" onClick={this.redirectRegister}>Register New Account</button>
 			    </div>
