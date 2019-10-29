@@ -40,15 +40,11 @@ class Login extends Component {
 		this.props.history.push('/home')
     }
 
-    redirectForgetPassword = () => {
-        this.props.history.push('/forgotpass')
-    }
-
     render() {
         const { authError } = this.props;
         return (
 			<div align="center">
-			  <button class="logobtn" onClick={this.redirectWelcome}></button>
+			  <button className="logobtn" onClick={this.redirectWelcome}></button>
 			  <form onSubmit={this.handleSubmit} className="white">   
 			    <div className="container" style={{width: "350px"}} align="left">
 			      <h2 style={{marginTop: "0px", marginBottom: "30px"}} align="center">Login</h2>
@@ -68,9 +64,9 @@ class Login extends Component {
                   <div className="red-text center">
                       { authError ? <p>{authError}</p> : null }
                   </div>
-			      <div align="right"><span class="password"><a onClick={this.redirectForgetPassword} >Forgot password?</a></span></div>
+			      <div align="right"><span class="password"><a href={'/forgotpass'} >Forgot password?</a></span></div>
 			      <br/><br/>
-			      <button class="registerbtn" onClick={this.redirectRegister}>Register New Account</button>
+			      <button className="registerbtn" onClick={this.redirectRegister}>Register New Account</button>
 			    </div>
 			  </form>
 			</div>

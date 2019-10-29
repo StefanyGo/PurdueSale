@@ -37,7 +37,7 @@ class ResetPass extends Component {
     render() {
         return (
 			<div align="center">
-			  <button class="logobtn" onClick={this.redirectWelcome}></button>
+			  <button className="logobtn" onClick={this.redirectWelcome}></button>
 			  <form onSubmit={this.handleSubmit} className="white">   
 			    <div className="container" style={{width: "350px"}} align="left">
 			      <h2 style={{marginTop: "0px", marginBottom: "30px"}} align="center">Reset Password</h2>
@@ -48,7 +48,7 @@ class ResetPass extends Component {
 			      <input id="pass2" type="password" placeholder="Enter New Password" name="pass2" required="" onChange={this.handleChange}/>
 			      <br/><br/>
 			      <button type="submit">Reset Password</button>
-			      <button class="cancelbtn" onClick={this.redirectWelcome} align="right">Cancel</button>
+			      <button className="cancelbtn" onClick={this.redirectWelcome} align="right">Cancel</button>
 			    </div>
 			  </form>
 			</div>

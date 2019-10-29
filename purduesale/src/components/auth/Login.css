@@ -68,3 +68,7 @@ button:hover {
 .container {
     padding: 16px;
 }
+
+.error {
+    border: 1px solid red;
+}

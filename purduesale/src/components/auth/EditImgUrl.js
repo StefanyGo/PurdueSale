@@ -2,7 +2,7 @@ import './Login.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { editImgUrl } from '../../store/actions/accountActions'
-import userlogo1 from '../dashboard/userlogo1.png'
+//import userlogo1 from '../dashboard/userlogo1.png'
 import { storage } from '../../config/fbConfig.js';
 
 class EditImgUrl extends Component {
@@ -31,10 +31,7 @@ class EditImgUrl extends Component {
 
     handleSubmit = () => {
         const {image} = this.state;
-        const rnd = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
-
-        console.log(rnd);
+        const rnd = uuidv4();
 
         const uploadTask = storage.ref(`images/${rnd}`).put(image);
         uploadTask.on('state_changed',
@@ -84,6 +81,11 @@ class EditImgUrl extends Component {
     }
 }
 
+function uuidv4() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {

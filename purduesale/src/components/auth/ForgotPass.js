@@ -40,7 +40,7 @@ class ForgotPass extends Component {
     render() {
         return (
 			<div align="center">
-			  <button class="logobtn" onClick={this.redirectWelcome}></button>
+			  <button className="logobtn" onClick={this.redirectWelcome}></button>
 			  <form onSubmit={this.handleSubmit} className="white">   
 			    <div className="container" style={{width: "350px"}} align="left">
 			      <h2 style={{marginTop: "0px", marginBottom: "30px"}} align="center">Forgot Password</h2>
@@ -53,8 +53,8 @@ class ForgotPass extends Component {
 			      </label>
 
 			      <button type="submit">Send Verification Email</button>
-			      <button class="cancelbtn" onClick={this.redirectWelcome} align="right">Cancel</button>
-			      <button class="registerbtn" onClick={this.redirectRegister}>Register New Account</button>
+			      <button className="cancelbtn" onClick={this.redirectWelcome} align="right">Cancel</button>
+			      <button className="registerbtn" onClick={this.redirectRegister}>Register New Account</button>
 			    </div>
 			  </form>
 			</div>
