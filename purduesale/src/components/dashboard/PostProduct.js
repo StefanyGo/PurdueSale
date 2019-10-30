@@ -5,7 +5,6 @@ import Select from 'react-select'
 import { addNewProduct } from '../../store/actions/accountActions'
 import { uuidv4 } from '../../components/auth/EditImgUrl'
 import { storage } from '../../config/fbConfig.js';
-import { isFlowBaseAnnotation } from '@babel/types';
 
 //const productTags = ["Furniture", "Textbooks", "Electronics", "Office Supplies", "Tools", "Clothes", "Food", "Transportation", "Other"];
 const productTags = [
