@@ -128,7 +128,6 @@ class PostProduct extends Component {
 				  <div>
 			        <label htmlFor="tag"><b>Product Tag</b></label>
 				    <Select id="tag"
-        			  value={"Furniture"}
     				  onChange={this.handleSelectChange}
         			  options={getProductTags()}
 					  placeholder={this.state.tag}
