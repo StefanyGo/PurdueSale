@@ -27,8 +27,9 @@ export const addNewProduct = (newProduct) => {
         const uid = firebase.auth().currentUser.uid;
         firestore.collection('users').doc(uid).get().then(function(doc) {
             if (doc.exists) {
+                const tagName = doc.data().email + "_" + doc.data().totalProducts;
                 const datePosted = firebase.firestore.Timestamp.fromDate(new Date());
-                firestore.collection('users').doc(uid).collection('products').doc(doc.data().totalProducts.toString()).set({
+                firestore.collection('products').doc(tagName).set({
                     productName: newProduct.productName,
                     description: newProduct.description,
                     date: datePosted,
@@ -39,11 +40,11 @@ export const addNewProduct = (newProduct) => {
                     posterName: doc.data().firstName + " " + doc.data().lastName,
                     posterEmail: doc.data().email,
                     uid: uid,
-                    oncampus: newProduct.oncampus
+                    oncampus: newProduct.oncampus,
+                    userProductID: doc.data().totalProducts.toString()
                 })
-                const tagName = doc.data().email + "_" + doc.data().totalProducts;
-                firestore.collection('products').doc(newProduct.tag).set({
-                    [tagName]: firestore.doc("users/" + uid + "/products/" + doc.data().totalProducts)
+                firestore.collection('users').doc(uid).collection('products').doc(doc.data().totalProducts.toString()).set({
+                    productReference: firestore.doc("products/" + tagName)
                 })
                 firestore.collection('users').doc(uid).update({
                     sellingProducts: doc.data().sellingProducts + 1,
