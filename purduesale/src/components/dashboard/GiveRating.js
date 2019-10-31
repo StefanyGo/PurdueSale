@@ -1,7 +1,8 @@
 import '../auth/Login.css';
 import React, { Component } from 'react';
 import Select from 'react-select'
-import { userActions } from '../../store/actions/userActions'
+import { giveRating } from '../../store/actions/userActions'
+import { connect } from 'react-redux'
 
 const ratings = [
 	{value: "1", label: "1"},
@@ -18,7 +19,8 @@ export function getRatings() {
 class GiveRating extends Component {
     state = {
 		comments: '',
-		rating: 'Please select a rating'
+		rating: 'Please select a rating',
+		email: this.props.id,
 	}
 	errors = {
 		comments: false,
@@ -50,15 +52,30 @@ class GiveRating extends Component {
 		Object.entries(this.errors).forEach(function([item, value]) {
 			if (value === true)
                 safe = false;
-                
-            if (safe === true) {
-				//console.log("no errors!");
-				
-            }
 		});
 
-		console.log(this.state.rating);
+		if (safe === true) {
+			switch(this.state.rating) {
+				case "1":
+					giveRating(1);				
+					break;
+				case "2":
+						giveRating(2);				
+						break;
+				case "3":
+						giveRating(3);				
+						break;	
+				case "4":
+						giveRating(4);				
+						break;	
+				case "5":
+						giveRating(5);				
+						break;		
+				default:
+				  // code block
+			  }
 
+		}
     }
     
 	redirectWelcome = () => {
@@ -100,4 +117,16 @@ class GiveRating extends Component {
         )
     }
 }
-export default GiveRating;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        giveRating: (rating) => dispatch(giveRating(rating))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GiveRating);
