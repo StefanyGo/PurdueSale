@@ -14,7 +14,7 @@ const UserDetails = (props) => {
                         <span className="card-title">{user.firstName} {user.lastName}</span>
                         <p>{user.bio}</p>
                     </div>
-                  <div className="card-action grey lighten-4 grey-text">
+                    <div className="card-action grey lighten-4 grey-text">
                         <div>Email Address:</div>
                         <div>{user.email}</div>
                     </div>

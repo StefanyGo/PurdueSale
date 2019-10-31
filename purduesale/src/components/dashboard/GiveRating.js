@@ -20,6 +20,7 @@ class GiveRating extends Component {
 		comments: '',
 		rating: 'Please select a rating',
 		email: this.props.id,
+		submitted: false,
 	}
 	errors = {
 		comments: false,
@@ -57,6 +58,11 @@ class GiveRating extends Component {
 			this.props.giveRating(this.state.rating);
 
 		}
+
+		this.setState({
+            submitted: true,
+        })
+
     }
     
 	redirectWelcome = () => {
@@ -73,6 +79,7 @@ class GiveRating extends Component {
 
     render() {
         return (
+			
 			<div align="center">
 			  <form onSubmit={this.handleSubmit} className="white">   
 			    <div className="container" style={{width: "350px"}} align="left">
