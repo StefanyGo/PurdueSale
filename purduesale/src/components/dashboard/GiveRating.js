@@ -1,9 +1,8 @@
 import '../auth/Login.css';
 import React, { Component } from 'react';
 import Select from 'react-select'
-import { giveRating } from '../../store/actions/userActions'
+import { giveRating } from '../../store/actions/accountActions'
 import { connect } from 'react-redux'
-
 const ratings = [
 	{value: "1", label: "1"},
 	{value: "2", label: "2"},
@@ -55,25 +54,7 @@ class GiveRating extends Component {
 		});
 
 		if (safe === true) {
-			switch(this.state.rating) {
-				case "1":
-					giveRating(1);				
-					break;
-				case "2":
-						giveRating(2);				
-						break;
-				case "3":
-						giveRating(3);				
-						break;	
-				case "4":
-						giveRating(4);				
-						break;	
-				case "5":
-						giveRating(5);				
-						break;		
-				default:
-				  // code block
-			  }
+			this.props.giveRating(this.state.rating);
 
 		}
     }

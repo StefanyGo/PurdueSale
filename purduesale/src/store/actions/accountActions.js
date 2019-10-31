@@ -20,9 +20,31 @@ export const editImgUrl = (imgUrl) => {
     }
 }
 
-export const addNewProduct = (newProduct) => {
+
+export const giveRating = (rating) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase();
+        const firestore = getFirestore();
+        const uid = firebase.auth().currentUser.uid;
+        // Get rating
+        // Get num of ratings
+        // Increase num of ratings
+        // ( Rating + new_Rating ) / 
+        // we here?!
+        // totalNumberOfRatings: doc.data().totalNumberOfRatings + 1,
+       // totalOfRatings: doc.data().totalOfRatings + rating,
+       firestore.collection('users').doc(uid).get().then(function(doc) { 
+       firestore.collection('users').doc(uid).update({
+            totalNumberOfRatings: doc.data().totalNumberOfRatings + 1,
+            totalOfRatings: parseFloat(doc.data().totalOfRatings) + parseInt(rating)
+        });
+    });
+    }
+}
+
+export const addNewProduct = (newProduct) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+     const firebase = getFirebase();
         const firestore = getFirestore();
         const uid = firebase.auth().currentUser.uid;
         firestore.collection('users').doc(uid).get().then(function(doc) {
