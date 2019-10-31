@@ -2,7 +2,7 @@ import '../auth/Login.css';
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Select from 'react-select'
-import { addNewProduct } from '../../store/actions/accountActions'
+import { addNewProduct } from '../../store/actions/productActions'
 import { uuidv4 } from '../../components/auth/EditImgUrl'
 import { storage } from '../../config/fbConfig.js';
 import MaskedInput from 'react-text-mask';
