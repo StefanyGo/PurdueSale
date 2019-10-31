@@ -15,8 +15,7 @@ const ProductSummary = ({product}) => {
             <b>{product.price}</b>
             <div class="card-action">
             <a >Add to Cart</a>
-            </div>
-            
+            </div>         
         </div>
 </div>
     )
