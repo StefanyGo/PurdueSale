@@ -5,6 +5,8 @@ import Select from 'react-select'
 import { addNewProduct } from '../../store/actions/accountActions'
 import { uuidv4 } from '../../components/auth/EditImgUrl'
 import { storage } from '../../config/fbConfig.js';
+import MaskedInput from 'react-text-mask';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask'
 
 //const productTags = ["Furniture", "Textbooks", "Electronics", "Office Supplies", "Tools", "Clothes", "Food", "Transportation", "Other"];
 const productTags = [
@@ -29,19 +31,23 @@ class PostProduct extends Component {
 		description: "",
 		tag: "Select a Product Tag",
 		image: null,
-		imgUrl: '',
-		dimensions: null
+		imgUrl: "",
+		dimensions: null,
+		price: "",
+		oncampus: false
 	}
 	errors = {
 		productName: false,
 		description: false,
 		tag: false,
-		image: false
+		image: false,
+		price: false
 	}
 
-	errorUpdate(productName, description, tag, image) {
+	errorUpdate(productName, description, tag, image, price) {
 		this.errors["productName"] = (productName.length === 0);
 		this.errors["description"] = (description.length === 0);
+		this.errors["price"] = (price.length === 0);
 		this.errors["tag"] = (tag === "Select a Product Tag");
 		this.errors["image"] = (image == null);
 		this.forceUpdate();
@@ -64,17 +70,49 @@ class PostProduct extends Component {
             const image = e.target.files[0];
             this.setState(() => ({image}));
         }
+	}    
+	
+	handleCheckmark = (e) => {
+        this.setState({
+            [e.target.id]: e.target.checked
+        })
     }
 
     handleSubmit = (e) => {
 		e.preventDefault();
-		this.errorUpdate(this.state.productName, this.state.description, this.state.tag, this.state.image);
+		this.errorUpdate(this.state.productName, this.state.description, this.state.tag, this.state.image, this.state.price);
 		var safe = true;
 		Object.entries(this.errors).forEach(function([item, value]) {
 			if (value === true)
 				safe = false;
 		});
 		if (safe) {
+			// Format price
+			var tmpPrice = this.state.price;
+			var index = tmpPrice.indexOf('_');
+			if (index >= 0) {
+				tmpPrice = tmpPrice.substring(0, index) + tmpPrice.substring(index + 1);
+				this.setState({price: tmpPrice})
+			}
+			index = tmpPrice.indexOf('.');
+			if (index < 0) {
+				tmpPrice += ".00";
+				this.setState({price: tmpPrice})
+			}
+			index = tmpPrice.indexOf('.');
+			if (index === tmpPrice.length - 2) {
+				tmpPrice += "0";
+				this.setState({price: tmpPrice})
+			}
+			else if (index === tmpPrice.length - 1) {
+				tmpPrice += "00";
+				this.setState({price: tmpPrice})
+			}
+			if (index <= 1) {
+				tmpPrice = "$0" + tmpPrice.substring(index);
+				this.setState({price: tmpPrice})
+			}
+
 			const {image} = this.state;
 			const rnd = uuidv4();
 			const uploadTask = storage.ref(`images/${rnd}`).put(image);
@@ -107,6 +145,18 @@ class PostProduct extends Component {
 	}
 
     render() {
+		const currencyMask = createNumberMask({
+			prefix: '$',
+			suffix: '',
+			includeThousandsSeparator: true,
+			thousandsSeparatorSymbol: ',',
+			allowDecimal: true,
+			decimalSymbol: '.',
+			decimalLimit: 2,
+			integerLimit: 7,
+			allowNegative: false,
+			allowLeadingZeroes: false,
+		})
         return (
 			<div align="center">
 			  <button className="logobtn" onClick={this.redirectWelcome}></button>
@@ -125,6 +175,15 @@ class PostProduct extends Component {
 			      <textarea id="description" placeholder="Enter Product Description" name="prodDesc" required="" style={{resize: "none", maxHeight: "100px", minHeight: "100px"}} onChange={this.handleChange}/>
 				  {this.errors["description"] ? <span style={{color: "red"}}>Please enter a product description.</span> : ''}
 			      <br/><br/>
+			      <label htmlFor="price"><b>Price</b></label>
+				  <MaskedInput id="price" mask={currencyMask} placeholder="$0.00" value={this.state.price} onChange={this.handleChange}/>
+				  {this.errors["price"] ? <span style={{color: "red"}}>Please enter a price for your product.</span> : ''}
+			      <br/><br/>
+			      <label>
+			        <input id="oncampus" type="checkbox" name="campus" onChange={this.handleCheckmark}/>
+			        <span style={{paddingLeft: "25px"}}>Selling item on campus</span>
+			      </label>
+				  <br/><br/>
 				  <div>
 			        <label htmlFor="tag"><b>Product Tag</b></label>
 				    <Select id="tag"
@@ -134,7 +193,7 @@ class PostProduct extends Component {
       				/>
 				  </div>
 				  {this.errors["tag"] ? <span style={{color: "red"}}>Please select a tag to describe your product.</span> : ''}
-				  <br/><br/>
+				  <br/>
 			      <button type="submit">Submit</button>
 			      <button className="cancelbtn" onClick={this.redirectHome}>Cancel</button>
 			    </div>

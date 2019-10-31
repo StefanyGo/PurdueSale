@@ -33,10 +33,12 @@ export const addNewProduct = (newProduct) => {
                     description: newProduct.description,
                     date: datePosted,
                     tag: newProduct.tag,
+                    price: newProduct.price,
                     imageUrl: newProduct.imgUrl,
                     status: "Available",
                     posterName: doc.data().firstName + " " + doc.data().lastName,
-                    posterEmail: doc.data().email
+                    posterEmail: doc.data().email,
+                    oncampus: newProduct.oncampus
                 })
                 const tagName = doc.data().email + "_" + doc.data().totalProducts;
                 firestore.collection('products').doc(newProduct.tag).set({
