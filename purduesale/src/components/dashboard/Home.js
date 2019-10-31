@@ -8,7 +8,7 @@ const Home = (props) => {
 
     const links = props.auth.uid ? 
     ( <div >
-        <span className="card-title">Home</span>
+        <span className="card-title">Our Products</span>
         <div >
             Welcome, {props.profile.firstName} {props.profile.lastName}!
         </div>    
