@@ -20,7 +20,6 @@ export const editImgUrl = (imgUrl) => {
     }
 }
 
-
 export const giveRating = (rating) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase();
@@ -72,3 +71,4 @@ export const addNewProduct = (newProduct) => {
         });
     }
 }
+
