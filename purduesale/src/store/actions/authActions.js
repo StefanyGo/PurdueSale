@@ -63,7 +63,9 @@ export const signUp = (newUser) => {
                         bio: '',
                         sellingProducts: 0,
                         soldProducts: 0,
-                        totalProducts: 0
+                        totalProducts: 0,
+                        totalOfRatings: 0,
+                        totalNumberOfRatings: 0,
                     })
                 }).then(() => {
                     dispatch({ type: 'SIGNUP_SUCCESS' })
@@ -89,7 +91,9 @@ export const signUp = (newUser) => {
                         bio: '',
                         sellingProducts: 0,
                         soldProducts: 0,
-                        totalProducts: 0
+                        totalProducts: 0,
+                        totalOfRatings: 0,
+                        totalNumberOfRatings: 0,
                     })
                 }).then(() => { 
                     dispatch({ type: 'SIGNUP_SUCCESS' })

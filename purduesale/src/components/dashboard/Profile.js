@@ -33,13 +33,27 @@ const Profile = (props) => {
         </div>
         <div>
             {props.profile.sellingProducts}
-        </div><br/>
+        </div>
         <div style={{fontWeight: 'bold'}}>
             The number of items you have sold is: 
         </div>
         <div>
             {props.profile.soldProducts}
         </div>
+        <br/>
+        <div style={{fontWeight: 'bold'}}>
+            Total of ratings is:
+        </div>
+        <div>
+            {props.profile.totalOfRatings}
+        </div>
+        <div style={{fontWeight: 'bold'}}>
+            Total number of ratings is:
+        </div>
+        <div>
+            {props.profile.totalNumberOfRatings}
+        </div>
+
         <br></br>
         <br></br>
         <span className="card-title">Manage Account</span>

@@ -16,6 +16,7 @@ import UserList from './components/dashboard/UserList';
 import UserDetails from './components/dashboard/UserDetails';
 import Faq from './components/dashboard/Faq';
 import EditImgUrl from './components/auth/EditImgUrl';
+import GiveRating from './components/dashboard/GiveRating';
 
 class App extends Component {
 
@@ -48,6 +49,7 @@ render() {
           <Route path='/userlist' component={UserList} />
           <Route path='/user/userlist' component={UserList} />
           <Route path='/user/:id' component={UserDetails} />
+          <Route path='/rate' component={GiveRating}/>
         </Switch>
       </div>
     </BrowserRouter>
