@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import GiveRating from './GiveRating';
 
 const UserDetails = (props) => {
     const { user } = props;
@@ -13,10 +14,11 @@ const UserDetails = (props) => {
                         <span className="card-title">{user.firstName} {user.lastName}</span>
                         <p>{user.bio}</p>
                     </div>
-                    <div className="card-action grey lighten-4 grey-text">
+                  <div className="card-action grey lighten-4 grey-text">
                         <div>Email Address:</div>
                         <div>{user.email}u</div>
                     </div>
+                    <GiveRating/>
                 </div>
             </div>
         )

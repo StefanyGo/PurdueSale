@@ -1,8 +1,8 @@
 import '../auth/Login.css';
 import React, { Component } from 'react';
 import Select from 'react-select'
-import { connect } from 'react-redux'
-import { addNewProduct } from '../../store/actions/accountActions'
+import { userActions } from '../../store/actions/userActions'
+
 const ratings = [
 	{value: "1", label: "1"},
 	{value: "2", label: "2"},
@@ -17,18 +17,15 @@ export function getRatings() {
 
 class GiveRating extends Component {
     state = {
-        productName: '',
 		comments: '',
 		rating: 'Please select a rating'
 	}
 	errors = {
-		productName: false,
 		comments: false,
 		rating: false
 	}
 
 	errorUpdate(productName, comments, ratings) {
-		this.errors["productName"] = (productName.length === 0);
 		this.errors["comments"] = (comments.length === 0);
 		this.errors["rating"] = (ratings === "Please select a rating");
 		this.forceUpdate();
@@ -57,7 +54,6 @@ class GiveRating extends Component {
             if (safe === true) {
 				//console.log("no errors!");
 				
-				
             }
 		});
 
@@ -80,12 +76,8 @@ class GiveRating extends Component {
     render() {
         return (
 			<div align="center">
-			  <button className="logobtn" onClick={this.redirectWelcome}></button>
 			  <form onSubmit={this.handleSubmit} className="white">   
 			    <div className="container" style={{width: "350px"}} align="left">
-			      <input id="productName" type="text" placeholder="Enter Product Name" name="ratingName" required="" onChange={this.handleChange}/>
-				  {this.errors["productName"] ? <span style={{color: "red"}}>Product name is required.</span> : ''}
-			      <br/>
 				  <div>
 			        <label htmlFor="rating"><b>Rating</b></label>
 				    <Select id="rating"
@@ -95,7 +87,7 @@ class GiveRating extends Component {
       				/>
 				  </div>
 				  {this.errors["rating"] ? <span style={{color: "red"}}>Please select a rating to describe interactions.</span> : ''}
-                  <br/><br/>
+                  <br/>
 			      <label htmlFor="comments"><b>Comments</b></label>
 			      <textarea id="comments" placeholder="Enter any comments about rating." name="ratingDesc" required="" style={{resize: "none", maxHeight: "100px", minHeight: "100px"}} onChange={this.handleChange}/>
 			      <br/>
