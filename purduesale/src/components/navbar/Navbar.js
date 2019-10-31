@@ -10,7 +10,7 @@ const Navbar = (props) => {
     return (
         <nav className="nav-wrapper.grey-darken-3">
             <div className="navbar-container">
-                <Link to='/' className="left" style={{fontSize: 35, paddingLeft: "10px"}}>PurdueSale</Link>
+                <Link to='/home' className="left" style={{fontSize: 35, paddingLeft: "10px"}}>PurdueSale</Link>
                 { links }
             </div>
         </nav>
