@@ -3,12 +3,21 @@ import userlogo1 from './userlogo1.png'
 
 const ProductSummary = ({product}) => {
     return(
-        <div className="card z-depth-0 project-summary">
-            <div className="card-content grey-text text-darken-3">
-                <span className="card-title">{product.description}</span>
-                <img className="Avatar" src={product.imageUrl || userlogo1} alt="UserLogo" width="200" height="150" />
+
+        <div class="card">
+            <div class="card-image">
+                <img className="Image" src={product.imageUrl || userlogo1} alt={product.ProductName}  />
+                
             </div>
+      <div class="card-content">
+      <span class="card-title">{product.productName}</span>
+        <p>{product.description}</p>
+      </div>
+      <b>{product.price}</b>
+      <div class="card-action">
+        <a >Add to Cart</a>
         </div>
+</div>
     )
 }
 

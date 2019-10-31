@@ -10,7 +10,7 @@ const Home = (props) => {
     ( <div >
         <span className="card-title">Home</span>
         <div >
-            Hi, {props.profile.firstName} {props.profile.lastName}!
+            Welcome, {props.profile.firstName} {props.profile.lastName}!
         </div>    
         <ProductList  products = {props.products}/>
     </div>
@@ -22,13 +22,11 @@ const Home = (props) => {
     ;
     
     return (
-        <div className="container section project-details">
             <div className="card z-depth-0s">
                 <div className="card-content">
                 { links }
                 </div>
             </div>
-        </div>
     )
 }
 

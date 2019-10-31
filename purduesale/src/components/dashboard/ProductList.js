@@ -25,21 +25,28 @@ class ProductList extends Component {
         } else {
             filteredProducts = products.filter(
                 product => {
-                    return product.id.toLowerCase().indexOf(search.toLowerCase()) !== -1
+                    return product.productName.toLowerCase().indexOf(search.toLowerCase()) !== -1
                 }
             );
         }
         return (
             <div className="product-list section">
                 <input type="text" value={this.state.search} onChange={this.onChange} />
-                { filteredProducts && filteredProducts.map(product => {
-                    return (
-                        <Link to={'/product/' + product.id}>
-                            <ProductSummary product={product}/>
-                        </Link>
-                    )
-                })
-                }
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="material-icons right">search</i>
+                </button>
+                <div class="row">
+                    { filteredProducts && filteredProducts.map(product => {
+                        return (
+                            <Link to={'/product/' + product.id}>
+                                <div class="col s3">
+                                <ProductSummary product={product}/>
+                                </div>
+                            </Link>
+                        )
+                    })
+                    }
+                </div>
             </div>
         )
     } 
