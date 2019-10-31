@@ -17,6 +17,7 @@ import UserDetails from './components/dashboard/UserDetails';
 import Faq from './components/dashboard/Faq';
 import EditImgUrl from './components/auth/EditImgUrl';
 import GiveRating from './components/dashboard/GiveRating';
+import Home from './components/dashboard/Home'
 
 class App extends Component {
 
@@ -35,6 +36,7 @@ render() {
       <div className="App">
         <Navbar />
         <Switch>
+          <Route path='/home' component={Home} />
           <Route path='/login' component={Login} />
           <Route path='/logout' component={Logout} />
           <Route path='/signup' component={SignUp} />
