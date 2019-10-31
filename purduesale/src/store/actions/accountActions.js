@@ -38,6 +38,7 @@ export const addNewProduct = (newProduct) => {
                     status: "Available",
                     posterName: doc.data().firstName + " " + doc.data().lastName,
                     posterEmail: doc.data().email,
+                    uid: uid,
                     oncampus: newProduct.oncampus
                 })
                 const tagName = doc.data().email + "_" + doc.data().totalProducts;
