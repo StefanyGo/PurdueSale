@@ -18,6 +18,7 @@ import Faq from './components/dashboard/Faq';
 import EditImgUrl from './components/auth/EditImgUrl';
 import GiveRating from './components/dashboard/GiveRating';
 import Home from './components/dashboard/Home'
+import MyProducts from './components/dashboard/MyProducts';
 
 class App extends Component {
 
@@ -49,6 +50,7 @@ render() {
           <Route path='/editbio' component={EditBio} />
           <Route path='/editimgurl' component={EditImgUrl} />
           <Route path='/userlist' component={UserList} />
+          <Route path='/myproductlist' component={MyProducts} />
           <Route path='/user/userlist' component={UserList} />
           <Route path='/user/:id' component={UserDetails} />
           <Route path='/rate' component={GiveRating}/>

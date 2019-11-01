@@ -1,18 +1,18 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import ProductList from './ProductList'
+import MyProductList from './MyProductList'
 
 
-const Home = (props) => {
+const MyProducts = (props) => {
 
     const links = props.auth.uid ? 
     ( <div >
-        <span className="card-title">Our Products</span>
+        <span className="card-title">Your Products</span>
         <div >
             Welcome, {props.profile.firstName} {props.profile.lastName}!
         </div>    
-        <ProductList  products = {props.products} user = {props.profile}/>
+        <MyProductList  products = {props.products} user = {props.profile}/>
     </div>
     ) 
     : 
@@ -39,4 +39,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(MyProducts)

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import ProductSummary from './ProductSummary'
 import Filter from './Filter'
 
-class ProductList extends Component {
+class MyProductList extends Component {
     state = {
         search: '',
         sort:'',
@@ -38,7 +38,10 @@ class ProductList extends Component {
         const { sort } = this.state;
         const { tag } = this.state;
         const { loc } = this.state;
+        const { user } = this.props;
+        console.log(user);
         let filteredProducts = products;
+
         if (sort !== ''){
             filteredProducts.sort((a,b)=>(sort==='lowest')? (a.price > b.price?1:-1): (a.price < b.price?1:-1))
         } else {
@@ -74,34 +77,22 @@ class ProductList extends Component {
 
     render(){
         const { products } = this.props;
-        const { search } = this.state;
+        const { user } = this.props;
         let filteredProducts;
         if (!products) {
             filteredProducts = products;
         } else {
-            
+            console.log(user.email)
             filteredProducts = this.listProducts(products)
             filteredProducts = filteredProducts.filter(
                 product => {
-                    return product.productName.toLowerCase().indexOf(search.toLowerCase()) !== -1
+                    console.log(product.productName)
+                    return product.posterEmail.toLowerCase().indexOf(user.email) !== -1
                 }
             );
         }
         return (
             <div>
-                <div className="product-list section">
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <i class="material-icons prefix">search</i>
-                                    <input id="autocomplete-input" type="text" value={this.state.search} onChange={this.onChange} />
-                                    <label for="autocomplete-input">Search</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <Filter handleChangeSort={this.handleChangeSort} handleChangeTag={this.handleChangeTag} handleChangeLocation={this.handleChangeLocation} count='5' />
                 <div class="row">
                     { filteredProducts && filteredProducts.map(product => {
@@ -132,4 +123,4 @@ export default compose(
     firestoreConnect([
         { collection: 'products' }
     ])
-)(ProductList)
+)(MyProductList)
