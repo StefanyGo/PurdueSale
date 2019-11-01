@@ -12,7 +12,8 @@ class ProductList extends Component {
         search: '',
         sort:'',
         sortedProd:'',
-        tag:''
+        tag:'',
+        loc:'',
     };
     
 
@@ -28,10 +29,15 @@ class ProductList extends Component {
         this.setState({tag: e.target.value});
     }
 
+    handleChangeLocation = e => {
+        this.setState({loc: e.target.value})
+    }
+
 
     listProducts(products){
         const { sort } = this.state;
         const { tag } = this.state;
+        const { loc } = this.state;
         let filteredProducts = products;
         if (sort !== ''){
             filteredProducts.sort((a,b)=>(sort==='lowest')? (a.price > b.price?1:-1): (a.price < b.price?1:-1))
@@ -45,6 +51,23 @@ class ProductList extends Component {
                     return product.tag.toLowerCase().indexOf(tag.toLowerCase()) !== -1
                 }
             );
+        }
+
+        if (loc != ''){
+            if (loc === "true") {
+                filteredProducts = filteredProducts.filter(
+                    product => {
+                        return product.oncampus == 1
+                    }
+                )
+            } else {
+                filteredProducts = filteredProducts.filter(
+                    product => {
+                        return product.oncampus == 0
+                    }
+                )
+            }
+            
         }
         return filteredProducts;
     }
@@ -70,7 +93,7 @@ class ProductList extends Component {
                 <button class="btn waves-effect waves-light" type="submit" name="action">Submit
                     <i class="material-icons right">search</i>
                 </button>
-                <Filter handleChangeSort={this.handleChangeSort} handleChangeTag={this.handleChangeTag}  count='5' />
+                <Filter handleChangeSort={this.handleChangeSort} handleChangeTag={this.handleChangeTag} handleChangeLocation={this.handleChangeLocation} count='5' />
                 <div class="row">
                     { filteredProducts && filteredProducts.map(product => {
                         return (
