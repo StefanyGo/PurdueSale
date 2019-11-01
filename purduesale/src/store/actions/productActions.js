@@ -71,6 +71,10 @@ export const editProduct = (product) => {
                 firestore.collection('users').doc(uid).update({
                     sellingProducts: doc.data().sellingProducts - 1,
                 })
+                else if (product.previousSold && product.status === "Removed")
+                firestore.collection('users').doc(uid).update({
+                    soldProducts: doc.data().soldProducts - 1,
+                })
             } else {
                 console.log("Document does not exist!");
             }
