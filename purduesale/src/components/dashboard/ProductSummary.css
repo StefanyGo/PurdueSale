@@ -1,4 +1,8 @@
 .card-image{
     height: 400px; /* Your height here */
-    overflow: hidden;
+    overflow: auto;
+}
+.Image{
+    height: 200px;
+    width: 200px;
 }
