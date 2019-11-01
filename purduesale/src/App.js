@@ -8,12 +8,14 @@ import Login from './components/auth/Login.js';
 import Logout from './components/auth/Logout.js';
 import SignUp from './components/auth/Signup';
 import PostProduct from './components/dashboard/PostProduct';
+import EditProduct from './components/dashboard/EditProduct';
 import Profile from './components/dashboard/Dashboard'
 import ForgotPass from './components/auth/ForgotPass';
 import ResetPassword from './components/auth/ResetPassword';
 import EditBio from './components/auth/EditBio';
 import UserList from './components/dashboard/UserList';
 import UserDetails from './components/dashboard/UserDetails';
+import ProductDetails from './components/dashboard/ProductDetails';
 import Faq from './components/dashboard/Faq';
 import EditImgUrl from './components/auth/EditImgUrl';
 import GiveRating from './components/dashboard/GiveRating';
@@ -43,6 +45,7 @@ render() {
           <Route path='/signup' component={SignUp} />
           <Route path='/faq' component={Faq} />
           <Route path='/postproduct' component={PostProduct} />
+          <Route path='/editproduct/:id' component={EditProduct} />
           <Route path='/user/faq' component={Faq} />
           <Route path='/profile' component={Profile} />
           <Route path='/forgotpass' component={ForgotPass} />
@@ -53,6 +56,7 @@ render() {
           <Route path='/myproductlist' component={MyProducts} />
           <Route path='/user/userlist' component={UserList} />
           <Route path='/user/:id' component={UserDetails} />
+          <Route path='/product/:id' component={ProductDetails} />
           <Route path='/rate' component={GiveRating}/>
         </Switch>
       </div>

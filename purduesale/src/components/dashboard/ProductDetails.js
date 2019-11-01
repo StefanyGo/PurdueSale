@@ -3,19 +3,19 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 
-const UserDetails = (props) => {
-    const { user } = props;
-    if (user) {
+const ProductDetails = (props) => {
+    const { product } = props;
+    if (product) {
         return (
             <div className="container section project-details">
                 <div className="card z-depth-0">
                     <div className="card-content">
-                        <span className="card-title">{user.firstName} {user.lastName}</span>
-                        <p>{user.bio}</p>
+                        <span className="card-title">{product.productName}</span>
+                        <p>{product.description}</p>
                     </div>
                     <div className="card-action grey lighten-4 grey-text">
-                        <div>Email Address:</div>
-                        <div>{user.email}u</div>
+                        <div>Posted By:</div>
+                        <div>{product.posterName}</div>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@ const UserDetails = (props) => {
     } else {
         return (
             <div className="container center">
-                <p>Loading users...</p>
+                <p>Loading products...</p>
             </div>
         )
     }
@@ -32,16 +32,16 @@ const UserDetails = (props) => {
 
 const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id;
-    const users = state.firestore.data.users;
-    const user = users ? users[id] : null
+    const products = state.firestore.data.products;
+    const product = products ? products[id] : null
     return {
-        user: user
+        product: product
     }
 } 
 
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        { collection: 'users' }
+        { collection: 'products' }
     ])
-)(UserDetails)
+)(ProductDetails)

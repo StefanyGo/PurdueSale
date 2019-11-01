@@ -19,7 +19,9 @@ export const addNewProduct = (newProduct) => {
                     posterEmail: doc.data().email,
                     uid: uid,
                     oncampus: newProduct.oncampus,
-                    userProductID: doc.data().totalProducts.toString()
+                    userProductID: doc.data().totalProducts.toString(),
+                    isTextbook: newProduct.isTextbook,
+                    textbookCourse: newProduct.textbookCourse
                 })
                 firestore.collection('users').doc(uid).collection('products').doc(doc.data().totalProducts.toString()).set({
                     productReference: firestore.doc("products/" + tagName)
@@ -27,6 +29,47 @@ export const addNewProduct = (newProduct) => {
                 firestore.collection('users').doc(uid).update({
                     sellingProducts: doc.data().sellingProducts + 1,
                     totalProducts: doc.data().totalProducts + 1
+                })
+            } else {
+                console.log("Document does not exist!");
+            }
+        }).catch(function(error) {
+            console.log("Error with document!:", error);
+        });
+    }
+}
+
+export const editProduct = (product) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        const uid = firebase.auth().currentUser.uid;
+        firestore.collection('users').doc(uid).get().then(function(doc) {
+            if (doc.exists) {
+                const tagName = doc.data().email + "_" + product.userProductID;
+                firestore.collection('products').doc(tagName).update({
+                    productName: product.productName,
+                    description: product.description,
+                    tag: product.tag,
+                    price: product.price,
+                    status: product.status,
+                    oncampus: product.oncampus,
+                    isTextbook: product.isTextbook,
+                    textbookCourse: product.textbookCourse
+                })
+                if (!product.previousSold && product.status == "Sold")
+                firestore.collection('users').doc(uid).update({
+                    sellingProducts: doc.data().sellingProducts - 1,
+                    soldProducts: doc.data().soldProducts + 1,
+                })
+                else if (product.previousSold && product.status != "Sold")
+                firestore.collection('users').doc(uid).update({
+                    sellingProducts: doc.data().sellingProducts + 1,
+                    soldProducts: doc.data().soldProducts - 1,
+                })
+                else if (!product.previousSold && product.status == "Removed")
+                firestore.collection('users').doc(uid).update({
+                    sellingProducts: doc.data().sellingProducts - 1,
                 })
             } else {
                 console.log("Document does not exist!");

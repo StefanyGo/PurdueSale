@@ -4,6 +4,7 @@ import Select from 'react-select'
 export default class Filter extends Component {
     render() {
         return (
+            <div>
             <div className="row">
                 <div className="col s3">
                 <label>Order By Price</label>
@@ -33,21 +34,23 @@ export default class Filter extends Component {
                             <option value="Transportation">Transportation</option>
                             <option value="Other">Other</option>
                         </select>
-                        
                     </div>
                 </div>
                 <div className="col s3">
-                <label>Location</label>
+                    <label>Class Specific Needs</label>
                     <div class="input-field col s12">
-                        <select className="browser-default" value={this.props.location}
-                        onChange={this.props.handleChangeLocation}>
+                        <select className="browser-default" value={this.props.course}
+                        onChange={this.props.handleChangeCourse}>
                             <option value="">Select</option>
-                            <option value="true">On-Campus</option>
-                            <option value="false">Off-Campus</option>
+                            <option value="CS">CS</option>
+                            <option value="COM">COM</option>
+                            <option value="MUS">MUS</option>
+                            <option value="EAPS">EAPS</option>
+                            <option value="ENGL">ENGL</option>
                         </select>
-                        
                     </div>
                 </div>
+            </div>
             </div>
         )
     }
