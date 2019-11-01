@@ -3,9 +3,6 @@ import userlogo1 from './userlogo1.png'
 import './ProductSummary.css';
 
 const ProductSummary = ({product}) => {
-    const height = 57;
-    const width = 100;
-    console.log(product.imageUrl.naturalWidth)
     return(
         <div class="card">
             <div class="card-image" align="center">

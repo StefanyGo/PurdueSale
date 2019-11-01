@@ -34,7 +34,6 @@ class PostProduct extends Component {
 		imgUrl: "",
 		dimensions: null,
 		price: "",
-		decPrice: 0.0,
 		oncampus: false,
 		isTextbook: false,
 		textbookCourse: ""
