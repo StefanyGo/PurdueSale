@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import GiveRating from './GiveRating';
 
 const UserDetails = (props) => {
     const { user } = props;
@@ -17,6 +18,12 @@ const UserDetails = (props) => {
                         <div>Email Address:</div>
                         <div>{user.email}</div>
                     </div>
+                    <div className="card-action grey lighten-4 grey-text">
+                    <div>Rating:</div>
+                    <div>{user.totalOfRatings / user.totalNumberOfRatings}</div>
+                    </div>
+                    
+                    <GiveRating id={user.email}/>
                 </div>
             </div>
         )
@@ -38,6 +45,7 @@ const mapStateToProps = (state, ownProps) => {
         user: user
     }
 } 
+
 
 export default compose(
     connect(mapStateToProps),

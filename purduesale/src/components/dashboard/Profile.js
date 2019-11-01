@@ -45,7 +45,7 @@ const Profile = (props) => {
             Total of ratings is:
         </div>
         <div>
-            {props.profile.totalOfRatings}
+            {props.profile.totalOfRatings / props.profile.totalNumberOfRatings}
         </div>
         <div style={{fontWeight: 'bold'}}>
             Total number of ratings is:
