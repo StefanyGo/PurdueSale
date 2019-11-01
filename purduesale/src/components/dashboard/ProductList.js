@@ -105,16 +105,6 @@ class ProductList extends Component {
             );
         }
 
-        if (course != ''){
-            filteredProducts = filteredProducts.filter(
-                product => {
-                    if (!product.textbookCourse) return null
-                    else 
-                    return product.textbookCourse.toLowerCase().indexOf(course.toLowerCase()) !== -1
-                }
-            );
-        }
-
         if (loc != ''){
             if (loc === "true") {
                 filteredProducts = filteredProducts.filter(
