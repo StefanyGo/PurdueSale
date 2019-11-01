@@ -1,5 +1,6 @@
 import authReducer from './authReducer'
 import productReducer from './productReducer'
+import productRefReducer from './productRefReducer'
 import userListReducer from './userListReducer'
 import { combineReducers } from 'redux'
 import { firestoreReducer } from 'redux-firestore'
@@ -8,6 +9,7 @@ import { firebaseReducer } from 'react-redux-firebase'
 const rootReducer = combineReducers({
     auth: authReducer,
     product: productReducer,
+    productRef: productRefReducer,
     user: userListReducer,
     firestore: firestoreReducer,
     firebase: firebaseReducer

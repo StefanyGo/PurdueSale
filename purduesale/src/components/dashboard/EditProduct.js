@@ -1,58 +1,55 @@
 import '../auth/Login.css';
 import React, { Component } from 'react'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import Select from 'react-select'
-import { addNewProduct } from '../../store/actions/productActions'
-import { uuidv4 } from '../../components/auth/EditImgUrl'
-import { storage } from '../../config/fbConfig.js';
+import { editProduct } from '../../store/actions/productActions'
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask'
+import { getProductTags } from './PostProduct'
+import { firestoreConnect } from 'react-redux-firebase'
 
-//const productTags = ["Furniture", "Textbooks", "Electronics", "Office Supplies", "Tools", "Clothes", "Food", "Transportation", "Other"];
-const productTags = [
-	{value: "Furniture", label: "Furniture"},
-	{value: "Textbooks", label: "Textbooks"},
-	{value: "Electronics", label: "Electronics"},
-	{value: "Office Supplies", label: "Office Supplies"},
-	{value: "Tools", label: "Tools"},
-	{value: "Clothes", label: "Clothes"},
-	{value: "Food", label: "Food"},
-	{value: "Transportation", label: "Transportation"},
-	{value: "Other", label: "Other"}
+const statusOptions = [
+	{value: "Available", label: "Available"},
+	{value: "On Discussion", label: "On Discussion"},
+	{value: "Sold", label: "Sold"},
+	{value: "Removed", label: "Removed"}
 ];
 
-export function getProductTags() {
-	return productTags;
-}
+const TMPID = "0";
 
-class PostProduct extends Component {
+class EditProduct extends Component {
+	constructor(props) {
+	  super(props);
+	}
+
     state = {
+		id: "",
         productName: "",
 		description: "",
-		tag: "Select a Product Tag",
-		image: null,
-		imgUrl: "",
-		dimensions: null,
+		tag: "",
+		status: "",
 		price: "",
 		oncampus: false,
+		previousSold: false,
 		isTextbook: false,
 		textbookCourse: ""
 	}
 	errors = {
 		productName: false,
 		description: false,
-		tag: false,
-		image: false,
 		price: false,
 		textbookCourse: false
 	}
 
-	errorUpdate(productName, description, tag, image, price, textbook, isTextbook) {
+	updateFields() {
+        
+	}
+
+	errorUpdate(productName, description, price, textbook, isTextbook) {
 		this.errors["productName"] = (productName.length === 0);
 		this.errors["description"] = (description.length === 0);
 		this.errors["price"] = (price.length === 0);
-		this.errors["tag"] = (tag === "Select a Product Tag");
-		this.errors["image"] = (image == null);
 		this.errors["textbookCourse"] = (isTextbook && textbook.length === 0);
 		this.forceUpdate();
 	}
@@ -78,6 +75,12 @@ class PostProduct extends Component {
 			})
 			this.errors["textbookCourse"] = false;
 		}
+	}	
+
+	handleAvailableChange = (e) => {
+        this.setState({
+            status: e.value
+        })
 	}
 
 	handleFileUpload = (e) => {
@@ -95,7 +98,7 @@ class PostProduct extends Component {
 
     handleSubmit = (e) => {
 		e.preventDefault();
-		this.errorUpdate(this.state.productName, this.state.description, this.state.tag, this.state.image, this.state.price, this.state.textbookCourse, this.state.isTextbook);
+		this.errorUpdate(this.state.productName, this.state.description, this.state.price, this.state.textbookCourse, this.state.isTextbook);
 		var safe = true;
 		Object.entries(this.errors).forEach(function([item, value]) {
 			if (value === true)
@@ -131,31 +134,13 @@ class PostProduct extends Component {
 			if (!this.state.isTextbook)
 				this.setState({textbookCourse: ""})
 
-			const {image} = this.state;
-			const rnd = uuidv4();
-			const uploadTask = storage.ref(`images/${rnd}`).put(image);
-        	uploadTask.on('state_changed',
-        	(snapshot) => {
-
-        	}, (error) => {
-            	console.log(error);
-        	}, () => {
-            	storage.ref('images').child(rnd).getDownloadURL().then(imgUrl => {
-                	console.log(imgUrl);
-                	this.setState({imgUrl});
-					this.props.addNewProduct(this.state)
-            		this.props.history.push('/profile')
-            	})
-        	})
+			this.props.addNewProduct(this.state)
+            this.props.history.push('/profile')
 		}
     }
     
 	redirectWelcome = () => {
 		this.props.history.push('/')
-	}
-	
-	redirectLogin = () => {
-		this.props.history.push('/login')
 	}
 	
 	redirectHome = () => {
@@ -175,22 +160,29 @@ class PostProduct extends Component {
 			allowNegative: false,
 			allowLeadingZeroes: false,
 		})
+		editProductLayout(this.props);
         return (
 			<div align="center">
 			  <button className="logobtn" onClick={this.redirectWelcome}></button>
 			  <form onSubmit={this.handleSubmit} className="white">   
 			    <div className="container" style={{width: "350px"}} align="left">
-			      <h2 style={{marginTop: "0px", marginBottom: "30px"}} align="center">Sell New Product</h2>
-			      <label htmlFor="file"><b>Product Image</b></label>
-                  <input type="file" id="file" onChange={this.handleFileUpload} name="file"/>
-				  {this.errors["image"] ? <span style={{color: "red"}}>Please select an image for your product.</span> : ''}
-			      <br/><br/><br/>
+			      <h2 style={{marginTop: "0px", marginBottom: "30px"}} align="center">Edit Product</h2>
+				  <div>
+			        <label htmlFor="status"><b>Product Status</b></label>
+				    <Select id="status"
+    				  onChange={this.handleAvailableChange}
+        			  options={statusOptions}
+					  placeholder={this.state.status}
+					  value={this.state.status}
+      				/>
+				  </div>
+				  <br/><br/>
                   <label htmlFor="prodName"><b>Product Name</b></label>
-			      <input id="productName" type="text" placeholder="Enter Product Name" name="prodName" required="" onChange={this.handleChange}/>
+			      <input id="productName" type="text"  value={this.state.productName} placeholder="Enter Product Name" name="prodName" required="" onChange={this.handleChange}/>
 				  {this.errors["productName"] ? <span style={{color: "red"}}>Product name is required.</span> : ''}
 			      <br/><br/>
 			      <label htmlFor="prodDesc"><b>Description</b></label>
-			      <textarea id="description" placeholder="Enter Product Description" name="prodDesc" required="" style={{resize: "none", maxHeight: "100px", minHeight: "100px"}} onChange={this.handleChange}/>
+			      <textarea id="description" placeholder="Enter Product Description" value={this.state.description} name="prodDesc" required="" style={{resize: "none", maxHeight: "100px", minHeight: "100px"}} onChange={this.handleChange}/>
 				  {this.errors["description"] ? <span style={{color: "red"}}>Please enter a product description.</span> : ''}
 			      <br/><br/>
 			      <label htmlFor="price"><b>Price</b></label>
@@ -198,7 +190,7 @@ class PostProduct extends Component {
 				  {this.errors["price"] ? <span style={{color: "red"}}>Please enter a price for your product.</span> : ''}
 			      <br/><br/>
 			      <label>
-			        <input id="oncampus" type="checkbox" name="campus" onChange={this.handleCheckmark}/>
+			        <input id="oncampus" type="checkbox" name="campus" onChange={this.handleCheckmark} value={this.state.oncampus}/>
 			        <span style={{paddingLeft: "25px"}}>Selling item on campus</span>
 			      </label>
 				  <br/><br/>
@@ -208,15 +200,14 @@ class PostProduct extends Component {
     				  onChange={this.handleSelectChange}
         			  options={getProductTags()}
 					  placeholder={this.state.tag}
+					  value={this.state.tag}
       				/>
 				  </div>
-				  {this.errors["tag"] ? <span style={{color: "red"}}>Please select a tag to describe your product.</span> : ''}
-				  <br/>
 				  {this.state["isTextbook"] ? <div><label htmlFor="textbookCourse"><b>Textbook</b>
 				  	  </label><input id="textbookCourse" type="text" value={this.state.textbookCourse} placeholder="Enter Course Number" name="textbook" required="" onChange={this.handleChange}/></div> : ''}
 				  {this.errors["textbookCourse"] ? <span style={{color: "red"}}>Please enter a course number for the textbook.<br/></span> : ''}
 				  <br/>
-			      <button type="submit">Submit</button>
+			      <button type="submit">Update</button>
 			      <button className="cancelbtn" onClick={this.redirectHome}>Cancel</button>
 			    </div>
 			  </form>
@@ -228,14 +219,65 @@ class PostProduct extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+		profile: state.firebase.profile,
+		products: state.firestore.ordered.products,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addNewProduct: (newProduct) => dispatch(addNewProduct(newProduct))
+        editProduct: (product) => dispatch(editProduct(product)),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostProduct);
+function editProductLayout(props) {
+	const { auth } = props;
+	const { profile } = props;
+	const uid = auth.uid;
+	console.log(uid);
+	/*firestore.collection('users').doc(uid).get().then(function(doc) {
+		if (doc.exists) {
+			var ref;
+			firestore.collection('users').doc(uid).collection('products').doc(TMPID).get().then(function(func) {
+				ref = firestore.document(doc.data().productReference);
+				console.log(ref);
+			}).then(function() {
+				ref.get().then(function(upd) {
+					this.setState({
+						productName: upd.data().productName,
+						description: upd.data().description,
+						tag: upd.data().tag,
+						status: upd.data().status,
+						price: upd.data().price,
+						oncampus: upd.data().oncampus,
+					})
+				})
+			})
+		} else {
+			console.log("Document does not exist!");
+		}
+	}).catch(function(error) {
+		console.log("Error with document!:", error);
+	});
+	
+	// I NEED THE UID OVER HERE!
+*/
+}
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect(props => {
+		console.log(props)
+        return [
+            /*{
+				collection: "users",
+				doc: props.auth.uid,
+				subcollections: [{ collection: "products" }]
+			},*/
+			{
+				collection: "products"
+			}
+        ];
+	})
+	)(EditProduct);
