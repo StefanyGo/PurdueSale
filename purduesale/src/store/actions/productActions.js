@@ -21,7 +21,8 @@ export const addNewProduct = (newProduct) => {
                     oncampus: newProduct.oncampus,
                     userProductID: doc.data().totalProducts.toString(),
                     isTextbook: newProduct.isTextbook,
-                    textbookCourse: newProduct.textbookCourse
+                    textbookCourse: newProduct.textbookCourse,
+                    productID: doc.data().totalProducts
                 })
                 firestore.collection('users').doc(uid).collection('products').doc(doc.data().totalProducts.toString()).set({
                     productReference: firestore.doc("products/" + tagName)
@@ -55,7 +56,8 @@ export const editProduct = (product) => {
                     status: product.status,
                     oncampus: product.oncampus,
                     isTextbook: product.isTextbook,
-                    textbookCourse: product.textbookCourse
+                    textbookCourse: product.textbookCourse,
+                    productID: product.productID
                 })
                 if (!product.previousSold && product.status == "Sold")
                 firestore.collection('users').doc(uid).update({

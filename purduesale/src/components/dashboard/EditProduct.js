@@ -24,7 +24,7 @@ class EditProduct extends Component {
 	}
 
     state = {
-		id: "",
+		productID: "",
         productName: "",
 		description: "",
 		tag: "",
