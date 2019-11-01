@@ -18,7 +18,6 @@ class ProductList extends Component {
             tag:'',
             loc:'',
             text:'',
-            course:'',
             history : [
                 'Books',
                 'Car',
@@ -142,7 +141,6 @@ class ProductList extends Component {
         if (!products) {
             filteredProducts = products;
         } else {
-            
             filteredProducts = this.listProducts(products)
             filteredProducts = filteredProducts.filter(
                 product => {
@@ -168,7 +166,7 @@ class ProductList extends Component {
                     </div>
                 </div>
                 </form>
-                <Filter handleChangeSort={this.handleChangeSort} handleChangeTag={this.handleChangeTag} handleChangeLocation={this.handleChangeLocation} handleChangeCourse={this.handleChangeCourse} />
+                <Filter handleChangeSort={this.handleChangeSort} handleChangeTag={this.handleChangeTag} handleChangeLocation={this.handleChangeLocation} count='5' />
                 <div class="row">
                     { filteredProducts && filteredProducts.map(product => {
                         return (
