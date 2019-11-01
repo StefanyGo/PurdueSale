@@ -10,10 +10,10 @@ const ProductSummary = ({product}) => {
                 <div class="card-content">
                 <span class="title">{product.productName}</span>
                 <p>{product.description}</p>
+                <b>{product.price}</b>
             </div>
-            <b>{product.price}</b>
             <div class="card-action">
-            <a >Add to Cart</a>
+            <a >{product.status}</a>
             </div>         
         </div>
 </div>

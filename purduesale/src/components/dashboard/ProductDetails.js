@@ -6,6 +6,16 @@ import userlogo1 from './userlogo1.png'
 
 const ProductDetails = (props) => {
     const { product } = props;
+    const listCourse = props.product.textbookCourse ? 
+    ( <div >
+        Can be used for course: {product.textbookCourse}
+    </div>
+    ) 
+    : 
+    ( <div >
+        Please login!
+    </div> )
+    ;
     if (product) {
         return (
             <div className="container section project-details">
@@ -13,9 +23,10 @@ const ProductDetails = (props) => {
                     <div className="card-content">
                         <span className="card-title">{product.productName}</span>
                         <p>{product.description}</p>
+                        <br></br>
+                        {listCourse}
                         <img className="Avatar" src={product.imageUrl || userlogo1} alt="UserLogo" width="200" height="150" />
                         <p>{product.price}</p>
-
                     </div>
                     <div className="card-action grey lighten-4 grey-text">
                         <div>Posted By:</div>
