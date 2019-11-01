@@ -97,7 +97,9 @@ class MyProductList extends Component {
                 <div class="row">
                     { filteredProducts && filteredProducts.map(product => {
                         return (
-                            <Link to={'/product/' + product.id}>
+                            <Link to={{
+                                pathname: "/editproduct/" + product.id,
+                            }}>
                                 <div class="col s3" key={product.id}>
                                 <ProductSummary product={product}/>
                                 </div>

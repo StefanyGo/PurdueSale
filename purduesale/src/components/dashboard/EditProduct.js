@@ -24,7 +24,7 @@ class EditProduct extends Component {
 	}
 
     state = {
-		productID: "",
+		userProductID: "",
         productName: "",
 		description: "",
 		tag: "",
@@ -33,17 +33,14 @@ class EditProduct extends Component {
 		oncampus: false,
 		previousSold: false,
 		isTextbook: false,
-		textbookCourse: ""
+		textbookCourse: "",
+		updatable: true
 	}
 	errors = {
 		productName: false,
 		description: false,
 		price: false,
 		textbookCourse: false
-	}
-
-	updateFields() {
-        
 	}
 
 	errorUpdate(productName, description, price, textbook, isTextbook) {
@@ -131,10 +128,7 @@ class EditProduct extends Component {
 				this.setState({price: tmpPrice})
 			}
 
-			if (!this.state.isTextbook)
-				this.setState({textbookCourse: ""})
-
-			this.props.addNewProduct(this.state)
+			this.props.editProduct(this.state)
             this.props.history.push('/profile')
 		}
     }
@@ -147,7 +141,53 @@ class EditProduct extends Component {
 		this.props.history.push('/home')
 	}
 
+	editProductLayout(pathname, products, auth) {
+		var index = pathname.lastIndexOf('/');
+		var updPath = pathname.substring(index + 1)
+		index = updPath.lastIndexOf('_');
+		var userPath = updPath.substring(0, index)
+		
+		if (userPath !== auth.email)
+			this.props.history.push('/product/' + updPath)
+
+		var product;
+		products.forEach(function(item) {
+			if (item.id === updPath) {
+				product = item;
+				return;
+			}
+		});
+
+		if (!product)
+			return;
+
+		this.setState({
+			userProductID: product.userProductID,
+        	productName: product.productName,
+			description: product.description,
+			tag: product.tag,
+			status: product.status,
+			price: product.price,
+			oncampus: product.oncampus,
+			previousSold: product.previousSold,
+			isTextbook: product.isTextbook,
+			textbookCourse: product.textbookCourse
+		})
+		if (product.status == "Sold") {
+			this.setState({
+				previousSold: true
+			})
+		}
+	}
+
     render() {
+		const { products } = this.props
+		const { auth } = this.props
+		const { pathname } = this.props.location
+        if ((products != null && typeof(products) !== 'undefined' ) && this.state.updatable) {
+			this.setState({ updatable: false })
+			this.editProductLayout(pathname, products, auth);
+        }
 		const currencyMask = createNumberMask({
 			prefix: '$',
 			suffix: '',
@@ -160,7 +200,6 @@ class EditProduct extends Component {
 			allowNegative: false,
 			allowLeadingZeroes: false,
 		})
-		editProductLayout(this.props);
         return (
 			<div align="center">
 			  <button className="logobtn" onClick={this.redirectWelcome}></button>
@@ -203,6 +242,7 @@ class EditProduct extends Component {
 					  value={this.state.tag}
       				/>
 				  </div>
+				  <br/>
 				  {this.state["isTextbook"] ? <div><label htmlFor="textbookCourse"><b>Textbook</b>
 				  	  </label><input id="textbookCourse" type="text" value={this.state.textbookCourse} placeholder="Enter Course Number" name="textbook" required="" onChange={this.handleChange}/></div> : ''}
 				  {this.errors["textbookCourse"] ? <span style={{color: "red"}}>Please enter a course number for the textbook.<br/></span> : ''}
@@ -231,53 +271,9 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-function editProductLayout(props) {
-	const { auth } = props;
-	const { profile } = props;
-	const uid = auth.uid;
-	console.log(uid);
-	/*firestore.collection('users').doc(uid).get().then(function(doc) {
-		if (doc.exists) {
-			var ref;
-			firestore.collection('users').doc(uid).collection('products').doc(TMPID).get().then(function(func) {
-				ref = firestore.document(doc.data().productReference);
-				console.log(ref);
-			}).then(function() {
-				ref.get().then(function(upd) {
-					this.setState({
-						productName: upd.data().productName,
-						description: upd.data().description,
-						tag: upd.data().tag,
-						status: upd.data().status,
-						price: upd.data().price,
-						oncampus: upd.data().oncampus,
-					})
-				})
-			})
-		} else {
-			console.log("Document does not exist!");
-		}
-	}).catch(function(error) {
-		console.log("Error with document!:", error);
-	});
-	
-	// I NEED THE UID OVER HERE!
-*/
-}
-
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    firestoreConnect(props => {
-		console.log(props)
-        return [
-            /*{
-				collection: "users",
-				doc: props.auth.uid,
-				subcollections: [{ collection: "products" }]
-			},*/
-			{
-				collection: "products"
-			}
-        ];
-	})
+    firestoreConnect([
+        { collection: 'products' }
+    ])
 	)(EditProduct);

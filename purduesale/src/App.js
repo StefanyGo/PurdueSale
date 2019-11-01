@@ -44,7 +44,7 @@ render() {
           <Route path='/signup' component={SignUp} />
           <Route path='/faq' component={Faq} />
           <Route path='/postproduct' component={PostProduct} />
-          <Route path='/editproduct' component={EditProduct} />
+          <Route path='/editproduct/:id' component={EditProduct} />
           <Route path='/user/faq' component={Faq} />
           <Route path='/profile' component={Profile} />
           <Route path='/forgotpass' component={ForgotPass} />

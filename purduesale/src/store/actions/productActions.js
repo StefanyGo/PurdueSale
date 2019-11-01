@@ -46,7 +46,7 @@ export const editProduct = (product) => {
         const uid = firebase.auth().currentUser.uid;
         firestore.collection('users').doc(uid).get().then(function(doc) {
             if (doc.exists) {
-                const tagName = doc.data().email + "_" + product.id;
+                const tagName = doc.data().email + "_" + product.userProductID;
                 firestore.collection('products').doc(tagName).update({
                     productName: product.productName,
                     description: product.description,
@@ -60,12 +60,16 @@ export const editProduct = (product) => {
                 if (!product.previousSold && product.status == "Sold")
                 firestore.collection('users').doc(uid).update({
                     sellingProducts: doc.data().sellingProducts - 1,
-                    sellingProducts: doc.data().soldProducts + 1,
+                    soldProducts: doc.data().soldProducts + 1,
                 })
                 else if (product.previousSold && product.status != "Sold")
                 firestore.collection('users').doc(uid).update({
                     sellingProducts: doc.data().sellingProducts + 1,
-                    sellingProducts: doc.data().soldProducts - 1,
+                    soldProducts: doc.data().soldProducts - 1,
+                })
+                else if (!product.previousSold && product.status == "Removed")
+                firestore.collection('users').doc(uid).update({
+                    sellingProducts: doc.data().sellingProducts - 1,
                 })
             } else {
                 console.log("Document does not exist!");
