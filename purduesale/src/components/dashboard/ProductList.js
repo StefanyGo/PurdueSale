@@ -88,11 +88,17 @@ class ProductList extends Component {
             );
         }
         return (
-            <div className="product-list section">
-                <input type="text" value={this.state.search} onChange={this.onChange} />
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                    <i class="material-icons right">search</i>
-                </button>
+            <div>
+                <div className="product-list section">
+                    <div class="row">
+                        <div class="col ">
+                            Search:
+                            <div class="input-field ">
+                                <input type="text" value={this.state.search} onChange={this.onChange} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <Filter handleChangeSort={this.handleChangeSort} handleChangeTag={this.handleChangeTag} handleChangeLocation={this.handleChangeLocation} count='5' />
                 <div class="row">
                     { filteredProducts && filteredProducts.map(product => {
