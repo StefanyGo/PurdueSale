@@ -25,6 +25,7 @@ class EditProduct extends Component {
 		tag: "",
 		status: "",
 		price: "",
+		decPrice: 0,
 		oncampus: false,
 		previousSold: false,
 		isTextbook: false,
@@ -122,6 +123,15 @@ class EditProduct extends Component {
 				tmpPrice = "$0" + tmpPrice.substring(index);
 				this.setState({price: tmpPrice})
 			}
+			
+			var toDec = tmpPrice;
+			index = toDec.indexOf(',');
+			while (index >= 0) {
+				toDec = toDec.substring(0, index) + toDec.substring(index + 1);
+				index = toDec.indexOf(',');
+			}
+			this.setState({decPrice: parseFloat(toDec.substring(1))});
+			console.log(parseFloat(toDec.substring(1)))
 
 			this.props.editProduct(this.state)
             this.props.history.push('/profile')
@@ -163,6 +173,7 @@ class EditProduct extends Component {
 			tag: product.tag,
 			status: product.status,
 			price: product.price,
+			decPrice: product.decPrice,
 			oncampus: product.oncampus,
 			previousSold: product.previousSold,
 			isTextbook: product.isTextbook,

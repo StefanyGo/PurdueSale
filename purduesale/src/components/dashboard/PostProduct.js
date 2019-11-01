@@ -34,6 +34,7 @@ class PostProduct extends Component {
 		imgUrl: "",
 		dimensions: null,
 		price: "",
+		decPrice: 0.0,
 		oncampus: false,
 		isTextbook: false,
 		textbookCourse: ""
@@ -127,6 +128,7 @@ class PostProduct extends Component {
 				tmpPrice = "$0" + tmpPrice.substring(index);
 				this.setState({price: tmpPrice})
 			}
+			this.setState({decPrice: parseFloat(tmpPrice.substring(1))});
 
 			if (!this.state.isTextbook)
 				this.setState({textbookCourse: ""})
