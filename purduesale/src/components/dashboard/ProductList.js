@@ -45,13 +45,12 @@ class ProductList extends Component {
         } else {
             
             filteredProducts = this.listProducts()
-            filteredProducts = products.filter(
+            filteredProducts = filteredProducts.filter(
                 product => {
                     return product.productName.toLowerCase().indexOf(search.toLowerCase()) !== -1
                 }
             );
         }
-        
         return (
             <div className="product-list section">
                 <input type="text" value={this.state.search} onChange={this.onChange} />
