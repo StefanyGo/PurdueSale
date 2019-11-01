@@ -12,6 +12,7 @@ class ProductList extends Component {
     constructor (props) {
         super(props);
         this.state = {
+            course:'',
             suggestions: [],
             sort:'',
             sortedProd:'',
@@ -105,6 +106,17 @@ class ProductList extends Component {
             );
         }
 
+        if (course != ''){
+            filteredProducts = filteredProducts.filter(
+                product => {
+                    if (!product.textbookCourse) {
+                        return null
+                    } 
+                    return product.textbookCourse.toLowerCase().indexOf(course.toLowerCase()) !== -1
+                }
+            );
+        }
+
         if (loc != ''){
             if (loc === "true") {
                 filteredProducts = filteredProducts.filter(
@@ -156,7 +168,7 @@ class ProductList extends Component {
                     </div>
                 </div>
                 </form>
-                <Filter handleChangeSort={this.handleChangeSort} handleChangeTag={this.handleChangeTag} handleChangeLocation={this.handleChangeLocation} count='5' />
+                <Filter handleChangeSort={this.handleChangeSort} handleChangeTag={this.handleChangeTag} handleChangeLocation={this.handleChangeLocation} handleChangeCourse={this.handleChangeCourse} count='5' />
                 <div class="row">
                     { filteredProducts && filteredProducts.map(product => {
                         return (
