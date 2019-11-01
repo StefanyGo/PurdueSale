@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import userlogo1 from './userlogo1.png'
 
 const ProductDetails = (props) => {
     const { product } = props;
@@ -12,6 +13,9 @@ const ProductDetails = (props) => {
                     <div className="card-content">
                         <span className="card-title">{product.productName}</span>
                         <p>{product.description}</p>
+                        <img className="Avatar" src={product.imageUrl || userlogo1} alt="UserLogo" width="200" height="150" />
+                        <p>{product.price}</p>
+
                     </div>
                     <div className="card-action grey lighten-4 grey-text">
                         <div>Posted By:</div>

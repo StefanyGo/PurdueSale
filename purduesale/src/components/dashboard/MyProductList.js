@@ -93,7 +93,6 @@ class MyProductList extends Component {
         }
         return (
             <div>
-                <Filter handleChangeSort={this.handleChangeSort} handleChangeTag={this.handleChangeTag} handleChangeLocation={this.handleChangeLocation} count='5' />
                 <div class="row">
                     { filteredProducts && filteredProducts.map(product => {
                         return (
