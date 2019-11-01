@@ -25,7 +25,7 @@ const Profile = (props) => {
             Bio 
         </div>
         <div style={{whiteSpace: 'pre-wrap', borderStyle: 'solid', borderWidth: '1px', borderColor: '#9F9F9F'}}>
-            {props.profile.bio}
+            {props.profile.bio === "" ? " " : props.profile.bio}
         </div>
         <br/><br/>
         <div style={{fontWeight: 'bold'}}>

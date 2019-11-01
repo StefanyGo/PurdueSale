@@ -127,6 +127,7 @@ class PostProduct extends Component {
 				tmpPrice = "$0" + tmpPrice.substring(index);
 				this.setState({price: tmpPrice})
 			}
+			this.setState({decPrice: parseFloat(tmpPrice.substring(1))});
 
 			if (!this.state.isTextbook)
 				this.setState({textbookCourse: ""})

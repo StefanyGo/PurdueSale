@@ -43,7 +43,7 @@ class MyProductList extends Component {
         let filteredProducts = products;
 
         if (sort !== ''){
-            filteredProducts.sort((a,b)=>(sort==='lowest')? (a.price > b.price?1:-1): (a.price < b.price?1:-1))
+            filteredProducts.sort((a,b)=>(sort==='lowest')? (a.decPrice > b.decPrice?1:-1): (a.decPrice < b.decPrice?1:-1))
         } else {
             filteredProducts.sort((a,b)=>(a.productName<b.productName?1:-1));
         };

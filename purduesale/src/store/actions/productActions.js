@@ -7,12 +7,21 @@ export const addNewProduct = (newProduct) => {
             if (doc.exists) {
                 const tagName = doc.data().email + "_" + doc.data().totalProducts;
                 const datePosted = firebase.firestore.Timestamp.fromDate(new Date());
+                		
+			    var toDec = newProduct.price;
+		    	var index = toDec.indexOf(',');
+		    	while (index >= 0) {
+		    		toDec = toDec.substring(0, index) + toDec.substring(index + 1);
+		    		index = toDec.indexOf(',');
+		    	}
+                
                 firestore.collection('products').doc(tagName).set({
                     productName: newProduct.productName,
                     description: newProduct.description,
                     date: datePosted,
                     tag: newProduct.tag,
                     price: newProduct.price,
+                    decPrice: parseFloat(toDec.substring(1)),
                     imageUrl: newProduct.imgUrl,
                     status: "Available",
                     posterName: doc.data().firstName + " " + doc.data().lastName,
@@ -44,6 +53,14 @@ export const editProduct = (product) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
         const uid = firebase.auth().currentUser.uid;
+
+        var toDec = product.price;
+        var index = toDec.indexOf(',');
+        while (index >= 0) {
+            toDec = toDec.substring(0, index) + toDec.substring(index + 1);
+            index = toDec.indexOf(',');
+        }
+
         firestore.collection('users').doc(uid).get().then(function(doc) {
             if (doc.exists) {
                 const tagName = doc.data().email + "_" + product.userProductID;
@@ -52,6 +69,7 @@ export const editProduct = (product) => {
                     description: product.description,
                     tag: product.tag,
                     price: product.price,
+                    decPrice: parseFloat(toDec.substring(1)),
                     status: product.status,
                     oncampus: product.oncampus,
                     isTextbook: product.isTextbook,
