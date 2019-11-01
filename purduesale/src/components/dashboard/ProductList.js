@@ -8,17 +8,64 @@ import ProductSummary from './ProductSummary'
 import Filter from './Filter'
 
 class ProductList extends Component {
-    state = {
-        search: '',
-        sort:'',
-        sortedProd:'',
-        tag:'',
-        loc:'',
-    };
+
+    constructor (props) {
+        super(props);
+        this.state = {
+            suggestions: [],
+            sort:'',
+            sortedProd:'',
+            tag:'',
+            loc:'',
+            text:'',
+            history : [
+                'Books',
+                'Car',
+                'Camera',
+                'Helmet',
+                'Couch',
+                'Sublease',
+                'Table',
+                'Food',
+                'Fruits',
+                'Textbook',
+            ]
+        };
+    }
     
 
     onChange = e => {
-        this.setState({search: e.target.value.substr(0, 20)});
+        const value = e.target.value;
+        let suggestions = [];
+        if (value.length > 0) {
+            const regex = new RegExp(`^${value}`, 'i');
+            suggestions = this.state.history.sort().filter(v => regex.test(v));
+        }
+        this.setState(() => ({ suggestions, text: value }));
+    }
+
+    addHistory = e => {
+        e.preventDefault();
+        this.setState({history: this.state.history.concat(this.state.text)})
+    }
+
+    renderSuggestions () {
+        const { suggestions } = this.state;
+        if (suggestions.length === 0) {
+            return null;
+        }
+        return (
+            <ul>
+                {suggestions.map((history) => <li onClick={() => this.suggestionSelected(history)}>{history}</li>)}
+            </ul>
+        )
+    }
+
+    suggestionSelected (value) {
+        this.setState(() =>({
+            text: value,
+            suggestions: [],
+        }))
     }
 
     handleChangeSort = e => {
@@ -74,7 +121,7 @@ class ProductList extends Component {
 
     render(){
         const { products } = this.props;
-        const { search } = this.state;
+        const { text } = this.state;
         let filteredProducts;
         if (!products) {
             filteredProducts = products;
@@ -83,25 +130,28 @@ class ProductList extends Component {
             filteredProducts = this.listProducts(products)
             filteredProducts = filteredProducts.filter(
                 product => {
-                    return product.productName.toLowerCase().indexOf(search.toLowerCase()) !== -1
+                    return product.productName.toLowerCase().indexOf(text.toLowerCase()) !== -1
                 }
             );
         }
         return (
             <div>
+                <form onSubmit={this.addHistory} >
                 <div className="product-list section">
                     <div class="row">
                         <div class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">search</i>
-                                    <input id="autocomplete-input" type="text" value={this.state.search} onChange={this.onChange} />
-                                    <label for="autocomplete-input">Search</label>
+                                    <input inline id="autocomplete-input" type="text" value={text} onChange={this.onChange}/>
+                                    {this.renderSuggestions()}
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                </form>
                 <Filter handleChangeSort={this.handleChangeSort} handleChangeTag={this.handleChangeTag} handleChangeLocation={this.handleChangeLocation} count='5' />
                 <div class="row">
                     { filteredProducts && filteredProducts.map(product => {
