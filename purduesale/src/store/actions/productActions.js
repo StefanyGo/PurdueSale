@@ -57,17 +57,17 @@ export const editProduct = (product) => {
                     isTextbook: product.isTextbook,
                     textbookCourse: product.textbookCourse
                 })
-                if (!product.previousSold && product.status == "Sold")
+                if (!product.previousSold && product.status === "Sold")
                 firestore.collection('users').doc(uid).update({
                     sellingProducts: doc.data().sellingProducts - 1,
                     soldProducts: doc.data().soldProducts + 1,
                 })
-                else if (product.previousSold && product.status != "Sold")
+                else if (product.previousSold && product.status !== "Sold")
                 firestore.collection('users').doc(uid).update({
                     sellingProducts: doc.data().sellingProducts + 1,
                     soldProducts: doc.data().soldProducts - 1,
                 })
-                else if (!product.previousSold && product.status == "Removed")
+                else if (!product.previousSold && product.status === "Removed")
                 firestore.collection('users').doc(uid).update({
                     sellingProducts: doc.data().sellingProducts - 1,
                 })

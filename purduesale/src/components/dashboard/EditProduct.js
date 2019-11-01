@@ -16,12 +16,7 @@ const statusOptions = [
 	{value: "Removed", label: "Removed"}
 ];
 
-const TMPID = "0";
-
 class EditProduct extends Component {
-	constructor(props) {
-	  super(props);
-	}
 
     state = {
 		userProductID: "",
@@ -61,7 +56,7 @@ class EditProduct extends Component {
         this.setState({
             tag: e.value
 		})
-		if (e.value == "Textbooks") {
+		if (e.value === "Textbooks") {
 			this.setState({
 				isTextbook: true
 			})
@@ -173,7 +168,7 @@ class EditProduct extends Component {
 			isTextbook: product.isTextbook,
 			textbookCourse: product.textbookCourse
 		})
-		if (product.status == "Sold") {
+		if (product.status === "Sold") {
 			this.setState({
 				previousSold: true
 			})
