@@ -93,7 +93,7 @@ class ProductList extends Component {
                     <div class="row">
                         <div class="col ">
                             Search:
-                            <div class="input-field ">
+                            <div class="input-field inline">
                                 <input type="text" value={this.state.search} onChange={this.onChange} />
                             </div>
                         </div>
