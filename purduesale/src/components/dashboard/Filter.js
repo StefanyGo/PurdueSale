@@ -37,6 +37,17 @@ export default class Filter extends Component {
                     </div>
                 </div>
                 <div className="col s3">
+                <label>Filter Location</label>
+                    <div class="input-field col s12">
+                        <select className="browser-default" value={this.props.loc}
+                        onChange={this.props.handleChangeLocation}>
+                            <option value="">Select</option>
+                            <option value="true">On-Campus</option>
+                            <option value="false">Off-Campus</option>
+                        </select>
+                    </div>
+                </div>
+                <div className="col s3">
                     <label>Class Specific Needs</label>
                     <div class="input-field col s12">
                         <select className="browser-default" value={this.props.course}
