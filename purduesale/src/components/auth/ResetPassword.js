@@ -31,7 +31,7 @@ class ResetPass extends Component {
 	}
 	
 	redirectHome = () => {
-		this.props.history.push('/profile')
+		this.props.history.push('/')
     }
 
     render() {

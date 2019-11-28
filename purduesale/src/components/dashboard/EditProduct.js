@@ -134,7 +134,7 @@ class EditProduct extends Component {
 	}
 	
 	redirectHome = () => {
-		this.props.history.push('/home')
+		this.props.history.push('/')
 	}
 
 	editProductLayout(pathname, products, auth) {

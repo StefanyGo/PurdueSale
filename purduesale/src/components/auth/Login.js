@@ -25,7 +25,7 @@ class Login extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.signIn(this.state)
-        this.props.history.push('/profile')
+        this.props.history.push('/')
     }
     
 	redirectWelcome = () => {
@@ -37,7 +37,7 @@ class Login extends Component {
 	}
 	
 	redirectHome = () => {
-		this.props.history.push('/home')
+		this.props.history.push('/')
     }
 
     render() {

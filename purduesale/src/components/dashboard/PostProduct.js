@@ -160,7 +160,7 @@ class PostProduct extends Component {
 	}
 	
 	redirectHome = () => {
-		this.props.history.push('/home')
+		this.props.history.push('/')
 	}
 
     render() {
