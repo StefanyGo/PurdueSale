@@ -39,7 +39,7 @@ render() {
       <div className="App">
         <Navbar />
         <Switch>
-          <Route path='/home' component={Home} />
+          <Route exact path='/' component={Home} />
           <Route path='/login' component={Login} />
           <Route path='/logout' component={Logout} />
           <Route path='/signup' component={SignUp} />

@@ -8,15 +8,15 @@ const ProductSummary = ({product}) => {
             <div class="card-image" align="center">
                 <img className="Image" src={product.imageUrl || userlogo1} resizeMode='contain' style={{height: "59%", width: "90%"}} alt={product.ProductName}  />
                 <div class="card-content">
-                <span class="title">{product.productName}</span>
-                <p>{product.description}</p>
-                <b>{product.price}</b>
+                    <span class="title">{product.productName}</span>
+                    <p>{product.description}</p>
+                    <b>{product.price}</b>
+                </div>
+                <div class="card-action">
+                    <p><a>{product.status}</a></p>
+                </div>         
             </div>
-            <div class="card-action">
-            <a >{product.status}</a>
-            </div>         
         </div>
-</div>
     )
 }
 
