@@ -21,6 +21,8 @@ import EditImgUrl from './components/auth/EditImgUrl';
 import GiveRating from './components/dashboard/GiveRating';
 import Home from './components/dashboard/Home'
 import MyProducts from './components/dashboard/MyProducts';
+import Settings from './components/dashboard/Settings';
+import Inbox from './components/dashboard/Inbox';
 
 class App extends Component {
 
@@ -58,6 +60,8 @@ render() {
           <Route path='/user/:id' component={UserDetails} />
           <Route path='/product/:id' component={ProductDetails} />
           <Route path='/rate' component={GiveRating}/>
+          <Route path='/settings' component={Settings}/>
+          <Route path='/inbox' component={Inbox}/>
         </Switch>
       </div>
     </BrowserRouter>

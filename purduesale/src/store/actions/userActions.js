@@ -17,3 +17,27 @@ export const giveRating = (rating) => {
         });
     }
 }
+
+export const getFollowed = () => {
+    console.log("HI?!?!?!?!");
+
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        const uid = firebase.auth().currentUser.uid;
+        let doc = firestore.collection('users').doc(uid).get();
+
+    }
+}
+
+export const getFollowing = () => {
+    console.log("HI?!?!?!?!");
+
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        const uid = firebase.auth().currentUser.uid;
+        let doc = firestore.collection('users').doc(uid).get();
+
+    }
+}
