@@ -21,6 +21,7 @@ import EditImgUrl from './components/auth/EditImgUrl';
 import GiveRating from './components/dashboard/GiveRating';
 import Home from './components/dashboard/Home'
 import MyProducts from './components/dashboard/MyProducts';
+import Messaging from './components/dashboard/Messaging';
 
 class App extends Component {
 
@@ -57,6 +58,7 @@ render() {
           <Route path='/user/userlist' component={UserList} />
           <Route path='/user/:id' component={UserDetails} />
           <Route path='/product/:id' component={ProductDetails} />
+          <Route path='/messages/:id' component={Messaging} />
           <Route path='/rate' component={GiveRating}/>
         </Switch>
       </div>
