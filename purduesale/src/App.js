@@ -23,6 +23,7 @@ import Home from './components/dashboard/Home'
 import MyProducts from './components/dashboard/MyProducts';
 import Settings from './components/dashboard/Settings';
 import Inbox from './components/dashboard/Inbox';
+import Messaging from './components/dashboard/Messaging';
 
 class App extends Component {
 
@@ -59,6 +60,7 @@ render() {
           <Route path='/user/userlist' component={UserList} />
           <Route path='/user/:id' component={UserDetails} />
           <Route path='/product/:id' component={ProductDetails} />
+          <Route path='/messages/:id' component={Messaging} />
           <Route path='/rate' component={GiveRating}/>
           <Route path='/settings' component={Settings}/>
           <Route path='/inbox' component={Inbox}/>

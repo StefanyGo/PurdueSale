@@ -37,6 +37,20 @@ button:hover {
     opacity: 0.75;
 }
 
+.receive {
+    background: #D7D7D7;
+    color: #000000;
+    padding: 4px 12px;
+	border-radius: 8px;
+}
+
+.send {
+    background: #3F2FDF;
+    color: #FFFFFF;
+    padding: 4px 12px;
+	border-radius: 8px;
+}
+
 .logobtn {
 	background-color: Transparent;
 	background-image: url('../../logo.png');
@@ -57,6 +71,13 @@ button:hover {
     width: 22%;
     background-image: linear-gradient(#DF4F4F, #9F2F2F);
 	float: right;
+}
+
+.sendbtn {
+	margin-top: 59px;
+    padding: 12px 0px;
+    width: 18%;
+    float: right
 }
 
 .registerbtn {

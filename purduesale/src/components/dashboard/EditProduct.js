@@ -258,13 +258,13 @@ const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
 		profile: state.firebase.profile,
-		products: state.firestore.ordered.products,
+		products: state.firestore.ordered.products
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        editProduct: (product) => dispatch(editProduct(product)),
+        editProduct: (product) => dispatch(editProduct(product))
     }
 }
 
