@@ -23,7 +23,7 @@ const UserDetails = (props) => {
                     <div>{user.totalOfRatings / user.totalNumberOfRatings}</div>
                     </div>
                     
-                    <GiveRating id={user.email}/>
+                    <GiveRating id={user.email} history={props.history}/>
                 </div>
             </div>
         )
