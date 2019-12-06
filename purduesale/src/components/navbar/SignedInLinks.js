@@ -21,7 +21,7 @@ const SignedInLinks = (props) => {
                 <li><a href="/settings"><img src={settings} style={{width:45, height:45, margin: "8px"}} /></a></li>
                 <li><a href="/login" onClick={props.signOut}><img src={logout} style={{width:60, height:60, padding: "0px"}} /></a></li> */}
             <li></li>
-            <li><a href="/inbox"><i class="material-icons">mail</i></a></li>
+            {props.profile.unreadsSize > 0 ? (<li><a href="/inbox"><i class="material-icons">drafts</i></a></li>) : (<li><a href="/inbox"><i class="material-icons">mail</i></a></li>)}
             <li><a href="/settings"><i class="material-icons">settings</i></a></li>
             <li><a href="/login" onClick={props.signOut}><i class="material-icons">settings_power</i></a></li>
         </ul>
