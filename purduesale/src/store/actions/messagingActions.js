@@ -14,6 +14,15 @@ export const addMessage = (message) => {
             firestore.collection('users').doc(message.receiverID).get().then(function(doc) {
                 if (doc.exists) {
                     const datePosted = firebase.firestore.Timestamp.fromDate(new Date());
+                    var arr = doc.data().unreads;
+
+                    if (!arr.includes(message.senderID)) {
+                        arr.push(message.senderID);
+                        firestore.collection('users').doc(message.receiverID).update({
+                            unreadsSize: arr.length,
+                            unreads: arr
+                        })
+                    }
 
                     firestore.collection('messages').add({
                         messageID: message.messageID,
@@ -23,7 +32,9 @@ export const addMessage = (message) => {
                         receiverEmail: message.receiverEmail,
                         text: message.text,
                         date: datePosted,
-                        invisible: false
+                        invisible: false,
+                        read: false,
+                        readDate: datePosted
                     })
                 }
                 else {
@@ -61,7 +72,9 @@ export const addFirstMessage = (message) => {
                         receiverEmail: doc.data().email,
                         text: "",
                         date: datePosted,
-                        invisible: true
+                        invisible: true,
+                        read: true,
+                        readDate: datePosted
                     })
                 }
                 else {
@@ -79,5 +92,40 @@ export const removeFalseMessage = (message) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
         firestore.collection('messages').doc(message.id).delete();
+    }
+}
+
+export const updateReceipt = (message) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        const datePosted = firebase.firestore.Timestamp.fromDate(new Date());
+
+        firestore.collection('messages').doc(message.id).update({
+            read: true,
+            readDate: datePosted
+        });
+
+        firestore.collection('users').doc(message.receiverID).get().then(function(doc) {
+            if (doc.exists) {
+                const datePosted = firebase.firestore.Timestamp.fromDate(new Date());
+                var arr = doc.data().unreads;
+
+                for (var i = arr.length - 1; i >= 0; --i)
+                if (arr[i] === message.senderID) {
+                    arr.splice(i, i+1);
+                    firestore.collection('users').doc(message.receiverID).update({
+                        unreadsSize: arr.length,
+                        unreads: arr
+                    })
+                    break;
+                }
+            }
+            else {
+                console.log("Document does not exist!");
+            }
+        }).catch(function(error) {
+            console.log("Error with document!:", error);
+        });
     }
 }
