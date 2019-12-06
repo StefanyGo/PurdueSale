@@ -80,6 +80,16 @@ button:hover {
 	margin-bottom: 0px;
 }
 
+.settingsbtn {
+	background-color: Transparent;
+	background-image: url('../../settings.png');
+    padding: 0px 0px;
+    width: 200px;
+	height: 100px;
+	float: center;
+	margin-bottom: 0px;
+}
+
 .logobtn:hover {
     opacity: 1.0;
 }
