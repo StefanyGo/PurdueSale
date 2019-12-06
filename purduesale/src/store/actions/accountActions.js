@@ -57,8 +57,8 @@ export const addFollower = (email) => {
 
         firestore.collection('users').doc(fields[4]).get().then(function(doc) { 
             firestore.collection('users').doc(fields[4]).update({
-                numFollowers: doc.data().numFollowing + 1,
-                followers: [...doc.data().following, email]
+                numFollowers: doc.data().numFollowers + 1,
+                followers: [...doc.data().followers, firebase.auth().currentUser.email]
             });
         });
     }
@@ -86,7 +86,7 @@ export const removeFollower = (email) => {
             const elements = [...doc.data().followers];
             const results = elements.filter(element => element.indexOf(email));
             firestore.collection('users').doc(fields[4]).update({
-                numFollowers: doc.data().numFollowing - 1,
+                numFollowers: doc.data().numFollowers - 1,
                 followers: [...results]
             });
         });

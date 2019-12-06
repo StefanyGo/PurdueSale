@@ -13,7 +13,6 @@ const ProductDetails = (props) => {
     ) 
     : 
     ( <div >
-        Please login!
     </div> )
     ;
     if (product) {

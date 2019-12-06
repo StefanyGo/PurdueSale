@@ -23,7 +23,7 @@ const UserDetails = (props) => {
                     </div>
                     <div className="card-action grey lighten-4 grey-text">
                         <div>Rating:</div>
-                        <div>{user.totalOfRatings / user.totalNumberOfRatings}</div>
+                        <div>{(user.totalNumberOfRatings !== 0) ? (user.totalOfRatings / user.totalNumberOfRatings) : "None"}</div>
                     </div>
                     <GiveRating id={user.email} history={props.history}/>
                 </div>

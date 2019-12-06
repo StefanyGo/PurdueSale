@@ -105,7 +105,7 @@ export const signUp = (newUser) => {
                         followers: [],
                         following: [],
                         unreads: [],
-                        unreadsSize: 0
+                        unreadsSize: 0,
                     })
                 }).then(() => { 
                     dispatch({ type: 'SIGNUP_SUCCESS' })
