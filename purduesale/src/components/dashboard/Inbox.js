@@ -22,7 +22,7 @@ class Inbox extends Component {
     render() {
 		const { messages } = this.props
 		const { auth } = this.props
-        const { pathname } = this.props.location
+        const { profile } = this.props
         const { users } = this.props
 
         if (auth.uid) {
@@ -50,13 +50,18 @@ class Inbox extends Component {
 
             if (names != null) {
                 let j = 0;
+                let unreads = this.props.users.find(e => e.id === auth.uid).unreads;
             
                 for (j = 0; j < this.state.contacts.length; j++) {
                     let contact = this.state.contacts[j];
                     let name = names[j];
+                    let isUnread = false;
+                    if (unreads.includes(contact.toString())) {
+                        isUnread = true;
+                    }
 
                     out.push( <div style={{marginTop: "8px", marginBottom: "8px"}} key={contact.toString()} className="inbox-list" align="left">
-                        <Link to={'/messages/' + contact.toString()}><b style={{color: "black"}}>{name}</b></Link>
+                        <Link to={'/messages/' + contact.toString()}><b style={isUnread ? {color: "black", fontStyle: "italic"} : {color: "black"}}>{isUnread ? ("(!) " + name + " (!)") : name}</b></Link>
                     </div> )
                 }
             }

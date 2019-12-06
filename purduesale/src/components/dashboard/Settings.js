@@ -12,13 +12,13 @@ const Settings = (props) => {
     ( <div >
           <span className="card-title">Settings</span>
         <div >
-            hi, {props.profile.firstName} {props.profile.lastName}!
+            Hi, {props.profile.firstName} {props.profile.lastName}!
 
             <br/>
             <div class="row" >
-                <div class="col"><ResetPassword/></div>
-                <div class="col"><EditBio/></div>
-                <div class="col"><EditImgUrl/></div>
+                <div class="col"><ResetPassword history={props.history}/></div>
+                <div class="col"><EditBio history={props.history}/></div>
+                <div class="col"><EditImgUrl history={props.history}/></div>
         </div>
         </div>
     </div>
