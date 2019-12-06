@@ -108,7 +108,6 @@ export const updateReceipt = (message) => {
 
         firestore.collection('users').doc(message.receiverID).get().then(function(doc) {
             if (doc.exists) {
-                const datePosted = firebase.firestore.Timestamp.fromDate(new Date());
                 var arr = doc.data().unreads;
 
                 for (var i = arr.length - 1; i >= 0; --i)
