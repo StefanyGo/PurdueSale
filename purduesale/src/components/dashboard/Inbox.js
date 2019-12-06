@@ -46,10 +46,7 @@ class Inbox extends Component {
             names = getUsers(users, this.state.contacts);
 
             
-            let out = []
-
-            // Access users
-            // Get doc item
+            let out = [];
 
             if (names != null) {
                 let j = 0;
@@ -58,15 +55,16 @@ class Inbox extends Component {
                     let contact = this.state.contacts[j];
                     let name = names[j];
 
-                    out.push( <div style={{marginTop: "8px", marginBottom: "8px"}} key={contact.toString()} className="" align="left">
-                        <Link to={'/messages/' + contact.toString()}><b style={{color: "#AFAFAF"}}>{name}</b></Link>
+                    out.push( <div style={{marginTop: "8px", marginBottom: "8px"}} key={contact.toString()} className="inbox-list" align="left">
+                        <Link to={'/messages/' + contact.toString()}><b style={{color: "black"}}>{name}</b></Link>
                     </div> )
                 }
             }
             
             return (
                 <div align="center">
-			        <div className="container" style={{width: "450px"}} align="left">
+			        <div className="container" style={{width: "450px"}}>
+                    <h3> Inbox </h3>
 			          <h2 style={{marginTop: "0px", marginBottom: "30px", fontSize: 18}} align="center"></h2>
                       {out}
 			          <br/>
