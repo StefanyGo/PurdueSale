@@ -54,9 +54,10 @@ class Inbox extends Component {
                 let k = this.state.contacts.length -1;
                 for (j = 0; j < this.state.contacts.length && k > -1; j++, k--) {
                     let contact = this.state.contacts[j];
+                    let contactInv = this.state.contacts[k];
                     let name = names[k];
                     let isUnread = false;
-                    if (unreads.includes(contact.toString())) {
+                    if (unreads.includes(contactInv.toString())) {
                         isUnread = true;
                     }
 
