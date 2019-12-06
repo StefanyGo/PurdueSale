@@ -26,6 +26,7 @@ import MyProducts from './components/dashboard/MyProducts';
 import Settings from './components/dashboard/Settings';
 import Inbox from './components/dashboard/Inbox';
 import Messaging from './components/dashboard/Messaging';
+import SubscribedProducts from './components/dashboard/SubscribedProducts';
 
 class App extends Component {
 
@@ -61,6 +62,7 @@ render() {
           <Route path='/myfollowers' component={MyFollowers} />
           <Route path='/myfollowing' component={MyFollowing} />
           <Route path='/myproductlist' component={MyProducts} />
+          <Route path='/subscribedproducts' component={SubscribedProducts} />
           <Route path='/user/userlist' component={UserList} />
           <Route path='/user/:id' component={UserDetails} />
           <Route path='/product/:id' component={ProductDetails} />

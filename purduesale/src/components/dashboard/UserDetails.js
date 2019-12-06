@@ -13,7 +13,7 @@ const UserDetails = (props) => {
                 <div className="card z-depth-0">
                     <div className="card-content">
                         <span className="card-title">{user.firstName} {user.lastName}</span>
-                        <p>{user.bio}</p>
+                        <p style={{whiteSpace: "pre-line"}}>{user.bio}</p>
                     </div>
                     <FollowButton user={user}/>
                     <br></br>

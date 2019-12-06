@@ -66,6 +66,12 @@ export const signUp = (newUser) => {
                         totalProducts: 0,
                         totalOfRatings: 0,
                         totalNumberOfRatings: 0,
+                        numFollowing: 0,
+                        numFollowers: 0,
+                        followers: [],
+                        following: [],
+                        unreads: [],
+                        unreadsSize: 0
                     })
                 }).then(() => {
                     dispatch({ type: 'SIGNUP_SUCCESS' })
@@ -94,6 +100,12 @@ export const signUp = (newUser) => {
                         totalProducts: 0,
                         totalOfRatings: 0,
                         totalNumberOfRatings: 0,
+                        numFollowing: 0,
+                        numFollowers: 0,
+                        followers: [],
+                        following: [],
+                        unreads: [],
+                        unreadsSize: 0
                     })
                 }).then(() => { 
                     dispatch({ type: 'SIGNUP_SUCCESS' })
