@@ -6,16 +6,16 @@ import userlogo1 from './userlogo1.png'
 
 const ProductDetails = (props) => {
     const { product } = props;
-    const listCourse = props.product.textbookCourse ? 
-    ( <div >
-        Can be used for course: {product.textbookCourse}
-    </div>
-    ) 
-    : 
-    ( <div >
-    </div> )
-    ;
     if (product) {
+        const listCourse = props.product.textbookCourse ? 
+        ( <div >
+            Can be used for course: {product.textbookCourse}
+        </div>
+        ) 
+        : 
+        ( <div >
+        </div> )
+        ;
         return (
             <div className="container section project-details">
                 <div className="card z-depth-0">
