@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
-import { addMessage, addFirstMessage, removeFalseMessage } from '../../store/actions/messagingActions'
+import { addMessage, addFirstMessage, removeFalseMessage, updateReceipt } from '../../store/actions/messagingActions'
 
 class Messaging extends Component {
     constructor(props) {
@@ -17,9 +17,11 @@ class Messaging extends Component {
             messageArr: [],
             firstUpdatable: 2,
             messageID: "",
+            isRead: false,
+            readDate: "",
 
             date: "",
-            text: ""
+            text: "",
         };
     }
 
@@ -53,6 +55,8 @@ class Messaging extends Component {
         var otherUser = pathname.substring(index + 1)
         var sender = auth.uid;
         var newMessageID = this.state.messageID;
+        var isRead = false;
+        var readDate = "";
 
         if (this.state.firstUpdatable === 2) {
             this.setState({
@@ -121,15 +125,48 @@ class Messaging extends Component {
             });
         }
 
-        if (messageArr.length > 0 && messageArr[0].invisible)
-            messageArr.splice(0, 1);
+        if (messageArr.length > 0) {
+            if (messageArr[0].invisible)
+                messageArr.splice(0, 1);
+
+            if (messageArr[messageArr.length - 1].senderID !== sender) {
+                if (!messageArr[messageArr.length - 1].read && !messageArr[messageArr.length - 1].invisible) {
+                    this.props.updateReceipt(messageArr[messageArr.length - 1]);
+                }
+            }
+            else {
+                if (messageArr[messageArr.length - 1].read && !messageArr[messageArr.length - 1].invisible) {
+                    isRead = true;
+                    var tmp = messageArr[messageArr.length - 1].date.toDate();
+                    var hours = tmp.getHours();
+                    var AMPM = " AM";
+                    if (hours >= 12) {
+                        AMPM = " PM";
+                        hours -= 12;
+                    }
+                    else if (hours === 0) {
+                        hours = 12;
+                    }
+
+                    readDate = ": " + hours + ":" + tmp.getMinutes() + AMPM + " on " + (tmp.getMonth()+1) + "/" + (tmp.getDay()+1) + "/" + tmp.getFullYear();
+                    console.log(readDate);
+
+                }
+            }
+        }
 
         this.setState({
-			messageArr: messageArr
+            messageArr: messageArr,
+            isRead: isRead,
+            readDate: readDate
 		})
         
         //console.log(messageArr);
     }
+    
+	redirectWelcome = () => {
+		this.props.history.push('/')
+	}
 
     render() {
 		const { messages } = this.props
@@ -176,6 +213,7 @@ class Messaging extends Component {
 			        <div className="container" style={{width: "450px"}} align="left">
 			          <h2 style={{marginTop: "0px", marginBottom: "30px", fontSize: 18}} align="center">{this.state.receiverEmail}</h2>
                       {out}
+                      {this.state.isRead ? <span style={{color: "gray", whiteSpace: "pre-line", float: "right", marginTop: "-9px", marginBottom: "0px", marginRight: "0px", fontSize: 12}}>Seen{this.state.readDate}</span> : ''}
 			          <br/>
 			          <button className="sendbtn" onClick={this.submitPost} >Send</button>
 			          <textarea id="text" placeholder="Enter New Message" onKeyDown={this.keyPressed} name="textdesc" value={this.state.text} required="" style={{resize: "none", maxHeight: "100px", minHeight: "100px", width: "77%"}} onChange={this.handleChange}/>
@@ -206,7 +244,8 @@ const mapDispatchToProps = (dispatch) => {
    return {
         addMessage: (message) => dispatch(addMessage(message)),
         addFirstMessage: (message) => dispatch(addFirstMessage(message)),
-        removeFalseMessage: (message) => dispatch(removeFalseMessage(message))
+        removeFalseMessage: (message) => dispatch(removeFalseMessage(message)),
+        updateReceipt: (message) => dispatch(updateReceipt(message))
     }
 }
 
