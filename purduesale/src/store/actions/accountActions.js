@@ -45,13 +45,22 @@ export const addFollower = (email) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
         const uid = firebase.auth().currentUser.uid;
+        const link = window.location.href;
+        var fields = link.split('/');
 
         firestore.collection('users').doc(uid).get().then(function(doc) { 
-        firestore.collection('users').doc(uid).update({
-            numFollowing: doc.data().numFollowing + 1,
-            following: [...doc.data().following, email]
+            firestore.collection('users').doc(uid).update({
+                numFollowing: doc.data().numFollowing + 1,
+                following: [...doc.data().following, email]
+            });
         });
-    });
+
+        firestore.collection('users').doc(fields[4]).get().then(function(doc) { 
+            firestore.collection('users').doc(fields[4]).update({
+                numFollowers: doc.data().numFollowing + 1,
+                followers: [...doc.data().following, email]
+            });
+        });
     }
 }
 
@@ -61,15 +70,26 @@ export const removeFollower = (email) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
         const uid = firebase.auth().currentUser.uid;
+        const link = window.location.href;
+        var fields = link.split('/');
 
         firestore.collection('users').doc(uid).get().then(function(doc) { 
-        const elements = [...doc.data().following];
-        const results = elements.filter(element => element.indexOf(email));
-        firestore.collection('users').doc(uid).update({
-            numFollowing: doc.data().numFollowing - 1,
-            following: [...results]
+            const elements = [...doc.data().following];
+            const results = elements.filter(element => element.indexOf(email));
+            firestore.collection('users').doc(uid).update({
+                numFollowing: doc.data().numFollowing - 1,
+                following: [...results]
+            });
         });
-    });
+
+        firestore.collection('users').doc(fields[4]).get().then(function(doc) { 
+            const elements = [...doc.data().followers];
+            const results = elements.filter(element => element.indexOf(email));
+            firestore.collection('users').doc(fields[4]).update({
+                numFollowers: doc.data().numFollowing - 1,
+                followers: [...results]
+            });
+        });
     }
 }
 
