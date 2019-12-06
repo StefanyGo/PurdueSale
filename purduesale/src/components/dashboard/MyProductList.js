@@ -5,7 +5,6 @@ import { compose } from 'redux'
 import { Link } from 'react-router-dom'
 
 import ProductSummary from './ProductSummary'
-import Filter from './Filter'
 
 class MyProductList extends Component {
     state = {

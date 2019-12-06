@@ -20,6 +20,8 @@ const Profile = (props) => {
         <div>
             {props.profile.email}
         </div>
+        <div><a href="myfollowers" >{props.profile.numFollowers} Followers</a></div>
+        <div><a href="myfollowing" >{props.profile.numFollowing} Following</a></div>
         <br/><br/>
         <div style={{fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline'}}>
             Bio 

@@ -14,6 +14,8 @@ import ForgotPass from './components/auth/ForgotPass';
 import ResetPassword from './components/auth/ResetPassword';
 import EditBio from './components/auth/EditBio';
 import UserList from './components/dashboard/UserList';
+import MyFollowers from './components/dashboard/MyFollowers';
+import MyFollowing from './components/dashboard/MyFollowing';
 import UserDetails from './components/dashboard/UserDetails';
 import ProductDetails from './components/dashboard/ProductDetails';
 import Faq from './components/dashboard/Faq';
@@ -56,6 +58,8 @@ render() {
           <Route path='/editbio' component={EditBio} />
           <Route path='/editimgurl' component={EditImgUrl} />
           <Route path='/userlist' component={UserList} />
+          <Route path='/myfollowers' component={MyFollowers} />
+          <Route path='/myfollowing' component={MyFollowing} />
           <Route path='/myproductlist' component={MyProducts} />
           <Route path='/user/userlist' component={UserList} />
           <Route path='/user/:id' component={UserDetails} />

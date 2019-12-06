@@ -8,7 +8,7 @@ const MyProducts = (props) => {
 
     const links = props.auth.uid ? 
     ( <div >
-        <span className="card-title">Your Products</span>
+        <span className="card-title">My Products</span>
         <div >
             Welcome, {props.profile.firstName} {props.profile.lastName}!
         </div>    
