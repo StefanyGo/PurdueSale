@@ -18,27 +18,26 @@ export const giveRating = (rating) => {
 // list of contacts
 // generate list (from users)
 // make them each links
+export const getUsers = (users, contacts) => {
 
-export const getUsers = (contacts, messages) => {
-    //console.log(messages);
-
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
-        const firebase = getFirebase();
-        const firestore = getFirestore();
-        const uid = firebase.auth().currentUser.uid;
-
+    let names = [];
+    if (users != null && typeof(users) !== 'undefined' ) {
         let i = 0;
-        for (i = 0; i < messages.length; i++) { 
-            let message = messages[i];
-            if (message.receiverID == uid) {
-                if (contacts.indexOf(message.senderID) == -1) {
-                    contacts.push(message.senderID);
+        let j = 0;
+        for (i = 0; i < users.length; i++) {
+            for (j = 0; j < contacts.length; j++) {
+                if (users[i].id == contacts[j]) {
+                    let name = users[i].firstName + " " + users[i].lastName;
+                    names.push(name);
                 }
-            } else if (message.senderID == uid) {
-                if (contacts.indexOf(message.receiverID) == -1) {
-                    contacts.push(message.receiverID);
-                }
+
             }
-        } 
+        }
+
+        return names;
     }
-}
+  }
+
+  export const print = (printable) => {
+      console.log(printable);
+  }
