@@ -40,7 +40,6 @@ class ForgotPass extends Component {
     render() {
         return (
 			<div align="center">
-			  <button className="logobtn" onClick={this.redirectWelcome}></button>
 			  <form onSubmit={this.handleSubmit} className="white">   
 			    <div className="container" style={{width: "350px"}} align="left">
 			      <h2 style={{marginTop: "0px", marginBottom: "30px"}} align="center">Forgot Password</h2>

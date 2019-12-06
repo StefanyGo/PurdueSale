@@ -209,6 +209,7 @@ class Messaging extends Component {
 
             return (
 		    	<div align="center">
+                <button className="logobtn" onClick={this.redirectWelcome}></button>
 		    	  <form onSubmit={this.handleSubmit} className="white">   
 			        <div className="container" style={{width: "450px"}} align="left">
 			          <h2 style={{marginTop: "0px", marginBottom: "30px", fontSize: 18}} align="center">{this.state.receiverEmail}</h2>
