@@ -8,6 +8,7 @@ const MyProducts = (props) => {
 
     const links = props.auth.uid ? 
     ( <div >
+        <h3> My Products </h3>
         <div >
             Click on each product to edit its details!
         </div>    
@@ -28,6 +29,7 @@ const MyProducts = (props) => {
             </div>
     )
 }
+
 
 const mapStateToProps = (state) => {
     console.log(state)

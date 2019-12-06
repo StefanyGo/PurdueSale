@@ -17,17 +17,18 @@ const SignedInLinks = (props) => {
             <li><a href="/myproductlist">Edit My Products</a></li>
             <li><a href="/postproduct">Sell Product</a></li>
             <li><a href="/userlist">Find Users</a></li>
-            <li><a href="/faq">FAQ</a></li>
             <li><a href="/inbox"><i class="material-icons">mail</i></a></li>
             <li><a href="/settings"><i class="material-icons">settings</i></a></li>
             <li><a href="/login" onClick={props.signOut}><i class="material-icons">settings_power</i></a></li>
                 {/* <li><a href="/inbox"><img src={props.profile.unreadsSize > 0 ? messagenew : message} style={{width:55, height:55, margin: "8px"}} /></a></li>
                 <li><a href="/settings"><img src={settings} style={{width:45, height:45, margin: "8px"}} /></a></li>
                 <li><a href="/login" onClick={props.signOut}><img src={logout} style={{width:60, height:60, padding: "0px"}} /></a></li> */}
-        </ul>
-        <NavLink to='/profile' className='btn btn-floating pink lighten-1'>
+            <li><NavLink to='/profile' className='btn btn-floating pink lighten-1'>
                 {props.profile.initials}
-            </NavLink>
+            </NavLink></li>
+
+        </ul>
+          
         </div>
     )
 }

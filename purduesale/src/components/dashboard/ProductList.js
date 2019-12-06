@@ -172,11 +172,13 @@ class ProductList extends Component {
                 <div class="row">
                     { filteredProducts && filteredProducts.map(product => {
                         return (
+                            <div>
                             <Link to={'/product/' + product.id}>
                                 <div class="col s3" key={product.id}>
                                 <ProductSummary email={profile.email} product={product}/>
                                 </div>
                             </Link>
+                            </div>
                         )
                     })
                     }

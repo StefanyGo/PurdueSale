@@ -4,6 +4,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import GiveRating from './GiveRating';
 import FollowButton from './FollowButton';
+import { Link } from 'react-router-dom'
 
 const UserDetails = (props) => {
     const { user } = props;
@@ -15,6 +16,7 @@ const UserDetails = (props) => {
                         <span className="card-title">{user.firstName} {user.lastName}</span>
                         <p style={{whiteSpace: "pre-line"}}>{user.bio}</p>
                     </div>
+                    <Link to={'/messages/' + getUID()}><b >Message user</b></Link>
                     <FollowButton user={user}/>
                     <br></br>
                     <div className="card-action grey lighten-4 grey-text">
@@ -39,11 +41,19 @@ const UserDetails = (props) => {
     
 }
 
+const getUID = (state) => {
+    const link = window.location.href;
+    var fields = link.split('/');
+
+    return fields[4];
+}
+
 const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id;
     const users = state.firestore.data.users;
     const user = users ? users[id] : null
     return {
+        id: id,
         user: user
     }
 } 
