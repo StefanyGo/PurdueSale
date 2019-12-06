@@ -62,6 +62,10 @@ button:hover {
 	border-radius: 8px;
 }
 
+.init {
+    margin-left: 0px;
+    margin-right: 25%;
+}
 .send {
     background: #3F2FDF;
     color: #FFFFFF;
