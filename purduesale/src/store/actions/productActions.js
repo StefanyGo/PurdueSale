@@ -109,49 +109,49 @@ export const editProduct = (product) => {
                     isTextbook: product.isTextbook,
                     textbookCourse: product.textbookCourse
                 })
-                if (!product.previousSold && product.status === "Sold") {
-                    firestore.collection('users').doc(uid).update({
-                        sellingProducts: doc.data().sellingProducts - 1,
-                        soldProducts: doc.data().soldProducts + 1,
-                    });
+                if (product.status === "Available")
+                    firestore.collection('notifications').doc(tagName).set({
+                        message: product.productName + " sold by " + product.posterName + " is now back in store and availale!",                        followers: [...product.followers],
+                        followers: [...product.followers],
+                        time: firebase.firestore.Timestamp.fromDate(new Date()),
+                    })
+                else if (product.status === "On Discussion")
+                    firestore.collection('notifications').doc(tagName).set({
+                        message: product.productName + " sold by " + product.posterName + " is on discussion. Grab things quick before it gets sold out!",                        followers: [...product.followers],
+                        followers: [...product.followers],
+                        time: firebase.firestore.Timestamp.fromDate(new Date()),
+                    })
+                else if (product.status === "Sold")
                     firestore.collection('notifications').doc(tagName).set({
                         message: product.productName + " sold by " + product.posterName + " has been sold.",
                         followers: [...product.followers],
                         time: firebase.firestore.Timestamp.fromDate(new Date()),
                     })
-                }
-                
-                else if (product.previousSold && product.status !== "Sold") {
-                    firestore.collection('users').doc(uid).update({
-                        sellingProducts: doc.data().sellingProducts + 1,
-                        soldProducts: doc.data().soldProducts - 1,
-                    })
-                    firestore.collection('notifications').doc(tagName).set({
-                        message: product.productName + " sold by " + product.posterName + " is no longer being sold.",
-                        followers: [...product.followers],
-                        time: firebase.firestore.Timestamp.fromDate(new Date()),
-                    })
-                }
-                else if (!product.previousSold && product.status === "Removed"){
-                    firestore.collection('users').doc(uid).update({
-                        sellingProducts: doc.data().sellingProducts - 1,
-                    })
+                else if (product.status === "Removed")
                     firestore.collection('notifications').doc(tagName).set({
                         message: product.productName + " sold by " + product.posterName + " has been removed.",
                         followers: [...product.followers],
                         time: firebase.firestore.Timestamp.fromDate(new Date()),
                     })
-                }
-                else if (product.previousSold && product.status === "Removed"){
-                    firestore.collection('users').doc(uid).update({
-                        soldProducts: doc.data().soldProducts - 1,
-                    })
-                    firestore.collection('notifications').doc(tagName).set({
-                        message: product.productName + " sold by " + product.posterName + " has been removed.",
-                        followers: [...product.followers],
-                        time: firebase.firestore.Timestamp.fromDate(new Date()),
-                    })
-                }
+                    
+                if (!product.previousSold && product.status === "Sold")
+                firestore.collection('users').doc(uid).update({
+                    sellingProducts: doc.data().sellingProducts - 1,
+                    soldProducts: doc.data().soldProducts + 1,
+                })
+                else if (product.previousSold && product.status !== "Sold")
+                firestore.collection('users').doc(uid).update({
+                    sellingProducts: doc.data().sellingProducts + 1,
+                    soldProducts: doc.data().soldProducts - 1,
+                })
+                else if (!product.previousSold && product.status === "Removed")
+                firestore.collection('users').doc(uid).update({
+                    sellingProducts: doc.data().sellingProducts - 1,
+                })
+                else if (product.previousSold && product.status === "Removed")
+                firestore.collection('users').doc(uid).update({
+                    soldProducts: doc.data().soldProducts - 1,
+                })
             } else {
                 console.log("Document does not exist!");
             }

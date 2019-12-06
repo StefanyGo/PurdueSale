@@ -8,9 +8,8 @@ const MyProducts = (props) => {
 
     const links = props.auth.uid ? 
     ( <div >
-        <span className="card-title">My Products</span>
         <div >
-            Welcome, {props.profile.firstName} {props.profile.lastName}!
+            Click on each product to edit its details!
         </div>    
         <MyProductList  products = {props.products} user = {props.profile}/>
     </div>

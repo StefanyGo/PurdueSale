@@ -24,7 +24,7 @@ const Profile = (props) => {
         <div><a href="myfollowers" >{props.profile.numFollowers} Followers</a></div>
         <div><a href="myfollowing" >{props.profile.numFollowing} Following</a></div>
         <br/><br/>
-        <Notifications notifications={props.notifications}/>
+        <Notifications email={props.profile.email} notifications={props.notifications}/>
         <br></br>
         <div style={{fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline'}}>
             Bio 
