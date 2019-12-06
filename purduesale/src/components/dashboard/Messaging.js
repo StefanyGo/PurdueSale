@@ -128,29 +128,30 @@ class Messaging extends Component {
         if (messageArr.length > 0) {
             if (messageArr[0].invisible)
                 messageArr.splice(0, 1);
-
-            if (messageArr[messageArr.length - 1].senderID !== sender) {
-                if (!messageArr[messageArr.length - 1].read && !messageArr[messageArr.length - 1].invisible) {
-                    this.props.updateReceipt(messageArr[messageArr.length - 1]);
+            if (messageArr.length > 0) {
+                if (messageArr[messageArr.length - 1].senderID !== sender) {
+                    if (!messageArr[messageArr.length - 1].read) {
+                        this.props.updateReceipt(messageArr[messageArr.length - 1]);
+                    }
                 }
-            }
-            else {
-                if (messageArr[messageArr.length - 1].read && !messageArr[messageArr.length - 1].invisible) {
-                    isRead = true;
-                    var tmp = messageArr[messageArr.length - 1].date.toDate();
-                    var hours = tmp.getHours();
-                    var AMPM = " AM";
-                    if (hours >= 12) {
-                        AMPM = " PM";
-                        hours -= 12;
-                    }
-                    else if (hours === 0) {
-                        hours = 12;
-                    }
+                else {
+                    if (messageArr[messageArr.length - 1].read && !messageArr[messageArr.length - 1].invisible) {
+                        isRead = true;
+                        var tmp = messageArr[messageArr.length - 1].date.toDate();
+                        var hours = tmp.getHours();
+                        var AMPM = " AM";
+                        if (hours >= 12) {
+                            AMPM = " PM";
+                            hours -= 12;
+                        }
+                        else if (hours === 0) {
+                            hours = 12;
+                        }
 
-                    readDate = ": " + hours + ":" + tmp.getMinutes() + AMPM + " on " + (tmp.getMonth()+1) + "/" + (tmp.getDay()+1) + "/" + tmp.getFullYear();
-                    console.log(readDate);
+                        readDate = "Seen: " + hours + ":" + tmp.getMinutes() + AMPM + " on " + (tmp.getMonth()+1) + "/" + (tmp.getDay()+1) + "/" + tmp.getFullYear();
+                        console.log(readDate);
 
+                    }
                 }
             }
         }
@@ -213,7 +214,7 @@ class Messaging extends Component {
 			        <div className="container" style={{width: "450px"}} align="left">
 			          <h2 style={{marginTop: "0px", marginBottom: "30px", fontSize: 18}} align="center">{this.state.receiverEmail}</h2>
                       {out}
-                      {this.state.isRead ? <span style={{color: "gray", whiteSpace: "pre-line", float: "right", marginTop: "-9px", marginBottom: "0px", marginRight: "0px", fontSize: 12}}>Seen{this.state.readDate}</span> : ''}
+                      {this.state.isRead ? <span style={{color: "gray", whiteSpace: "pre-line", float: "right", marginTop: "-9px", marginBottom: "0px", marginRight: "0px", fontSize: 12}}>{this.state.readDate}</span> : ''}
 			          <br/>
 			          <button className="sendbtn" onClick={this.submitPost} >Send</button>
 			          <textarea id="text" placeholder="Enter New Message" onKeyDown={this.keyPressed} name="textdesc" value={this.state.text} required="" style={{resize: "none", maxHeight: "100px", minHeight: "100px", width: "77%"}} onChange={this.handleChange}/>
