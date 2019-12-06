@@ -1,13 +1,14 @@
 import React from 'react'
-
+import { compose } from 'redux'
 import { connect } from 'react-redux'
-
+import { firestoreConnect } from 'react-redux-firebase'
 import userlogo1 from './userlogo1.png'
+import Notifications from './Notifications'
 
 const Profile = (props) => {
 
     const links = props.auth.uid ? 
-    ( <div >
+    ( <div className="row">
         <span className="card-title" style={{fontSize: 35}}>My Profile</span><br/>
         <div style={{textDecorationLine: 'underline', fontSize: 18}}>
             {props.profile.firstName} {props.profile.lastName}
@@ -23,6 +24,8 @@ const Profile = (props) => {
         <div><a href="myfollowers" >{props.profile.numFollowers} Followers</a></div>
         <div><a href="myfollowing" >{props.profile.numFollowing} Following</a></div>
         <br/><br/>
+        <Notifications notifications={props.notifications}/>
+        <br></br>
         <div style={{fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline'}}>
             Bio 
         </div>
@@ -58,6 +61,7 @@ const Profile = (props) => {
 
         <br></br>
         <br></br>
+
     </div>
     ) 
     : 
@@ -81,8 +85,14 @@ const mapStateToProps = (state) => {
     console.log(state)
     return {
         auth: state.firebase.auth,
-        profile: state.firebase.profile
+        profile: state.firebase.profile,
+        notifications: state.firestore.ordered.notifications
     }
 }
 
-export default connect(mapStateToProps)(Profile)
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        { collection: 'notifications'},
+    ])
+)(Profile)

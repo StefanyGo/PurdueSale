@@ -30,7 +30,10 @@ class EditProduct extends Component {
 		previousSold: false,
 		isTextbook: false,
 		textbookCourse: "",
-		updatable: true
+		updatable: true,
+		date: "",
+		posterName: "",
+		followers: [],
 	}
 	errors = {
 		productName: false,
@@ -162,13 +165,16 @@ class EditProduct extends Component {
         	productName: product.productName,
 			description: product.description,
 			tag: product.tag,
+			date: product.date,
 			status: product.status,
 			price: product.price,
 			decPrice: product.decPrice,
 			oncampus: product.oncampus,
 			previousSold: product.previousSold,
 			isTextbook: product.isTextbook,
-			textbookCourse: product.textbookCourse
+			textbookCourse: product.textbookCourse,
+            posterName: product.posterName,
+            followers: [...product.followers],
 		})
 		if (product.status === "Sold") {
 			this.setState({

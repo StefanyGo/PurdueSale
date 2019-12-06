@@ -137,7 +137,7 @@ class ProductList extends Component {
     }
 
     render(){
-        const { products } = this.props;
+        const { products, profile } = this.props;
         const { text } = this.state;
         let filteredProducts;
         if (!products) {
@@ -174,7 +174,7 @@ class ProductList extends Component {
                         return (
                             <Link to={'/product/' + product.id}>
                                 <div class="col s3" key={product.id}>
-                                <ProductSummary product={product}/>
+                                <ProductSummary email={profile.email} product={product}/>
                                 </div>
                             </Link>
                         )
@@ -190,6 +190,7 @@ const mapStateToProps = (state) => {
     console.log(state)
     return {
         products: state.firestore.ordered.products,
+        profile: state.firebase.profile,
     }
 }
 

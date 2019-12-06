@@ -2,7 +2,7 @@ import React from 'react'
 import userlogo1 from './userlogo1.png'
 import './ProductSummary.css';
 
-const ProductSummary = ({product}) => {
+const ProductSummary = ({product, email}) => {
     return(
         <div class="card">
             <div class="card-image" align="center">

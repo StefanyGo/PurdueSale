@@ -30,8 +30,10 @@ export const addNewProduct = (newProduct) => {
                     oncampus: newProduct.oncampus,
                     userProductID: doc.data().totalProducts.toString(),
                     isTextbook: newProduct.isTextbook,
-                    textbookCourse: newProduct.textbookCourse
+                    textbookCourse: newProduct.textbookCourse,
+                    followers: [],
                 })
+
                 firestore.collection('users').doc(uid).collection('products').doc(doc.data().totalProducts.toString()).set({
                     productReference: firestore.doc("products/" + tagName)
                 })
@@ -44,6 +46,38 @@ export const addNewProduct = (newProduct) => {
             }
         }).catch(function(error) {
             console.log("Error with document!:", error);
+        });
+    }
+}
+
+export const followProduct = (email, product) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        const uid = firebase.auth().currentUser.uid;
+        const tagName = product.posterEmail + "_" + product.userProductID
+
+        firestore.collection('products').doc(tagName).get().then(function(doc) { 
+            firestore.collection('products').doc(tagName).update({
+                followers: [...doc.data().followers, email]
+            });
+        });
+    }
+}
+
+export const unfollowProduct = (email, product) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        const uid = firebase.auth().currentUser.uid;
+        const tagName = product.posterEmail + "_" + product.userProductID
+
+        firestore.collection('products').doc(tagName).get().then(function(doc) { 
+            const elements = [...doc.data().followers];
+            const results = elements.filter(element => element.indexOf(email));
+            firestore.collection('products').doc(tagName).update({
+                followers: [...results]
+            });
         });
     }
 }
@@ -75,24 +109,49 @@ export const editProduct = (product) => {
                     isTextbook: product.isTextbook,
                     textbookCourse: product.textbookCourse
                 })
-                if (!product.previousSold && product.status === "Sold")
-                firestore.collection('users').doc(uid).update({
-                    sellingProducts: doc.data().sellingProducts - 1,
-                    soldProducts: doc.data().soldProducts + 1,
-                })
-                else if (product.previousSold && product.status !== "Sold")
-                firestore.collection('users').doc(uid).update({
-                    sellingProducts: doc.data().sellingProducts + 1,
-                    soldProducts: doc.data().soldProducts - 1,
-                })
-                else if (!product.previousSold && product.status === "Removed")
-                firestore.collection('users').doc(uid).update({
-                    sellingProducts: doc.data().sellingProducts - 1,
-                })
-                else if (product.previousSold && product.status === "Removed")
-                firestore.collection('users').doc(uid).update({
-                    soldProducts: doc.data().soldProducts - 1,
-                })
+                if (!product.previousSold && product.status === "Sold") {
+                    firestore.collection('users').doc(uid).update({
+                        sellingProducts: doc.data().sellingProducts - 1,
+                        soldProducts: doc.data().soldProducts + 1,
+                    });
+                    firestore.collection('notifications').doc(tagName).set({
+                        message: product.productName + " sold by " + product.posterName + " has been sold.",
+                        followers: [...product.followers],
+                        time: firebase.firestore.Timestamp.fromDate(new Date()),
+                    })
+                }
+                
+                else if (product.previousSold && product.status !== "Sold") {
+                    firestore.collection('users').doc(uid).update({
+                        sellingProducts: doc.data().sellingProducts + 1,
+                        soldProducts: doc.data().soldProducts - 1,
+                    })
+                    firestore.collection('notifications').doc(tagName).set({
+                        message: product.productName + " sold by " + product.posterName + " is no longer being sold.",
+                        followers: [...product.followers],
+                        time: firebase.firestore.Timestamp.fromDate(new Date()),
+                    })
+                }
+                else if (!product.previousSold && product.status === "Removed"){
+                    firestore.collection('users').doc(uid).update({
+                        sellingProducts: doc.data().sellingProducts - 1,
+                    })
+                    firestore.collection('notifications').doc(tagName).set({
+                        message: product.productName + " sold by " + product.posterName + " has been removed.",
+                        followers: [...product.followers],
+                        time: firebase.firestore.Timestamp.fromDate(new Date()),
+                    })
+                }
+                else if (product.previousSold && product.status === "Removed"){
+                    firestore.collection('users').doc(uid).update({
+                        soldProducts: doc.data().soldProducts - 1,
+                    })
+                    firestore.collection('notifications').doc(tagName).set({
+                        message: product.productName + " sold by " + product.posterName + " has been removed.",
+                        followers: [...product.followers],
+                        time: firebase.firestore.Timestamp.fromDate(new Date()),
+                    })
+                }
             } else {
                 console.log("Document does not exist!");
             }

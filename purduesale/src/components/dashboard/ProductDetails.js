@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import userlogo1 from './userlogo1.png'
+import NotifyButton from './NotifyButton'
 
 const ProductDetails = (props) => {
-    const { product } = props;
+    const { product, profile } = props;
     if (product) {
         const listCourse = props.product.textbookCourse ? 
         ( <div >
@@ -31,6 +32,7 @@ const ProductDetails = (props) => {
                         <div>Posted By:</div>
                         <div>{product.posterName}</div>
                     </div>
+                    <NotifyButton product={product} email={profile.email} ></NotifyButton>
                 </div>
             </div>
         )
@@ -49,7 +51,9 @@ const mapStateToProps = (state, ownProps) => {
     const products = state.firestore.data.products;
     const product = products ? products[id] : null
     return {
-        product: product
+        product: product,
+        profile: state.firebase.profile,
+        
     }
 } 
 
