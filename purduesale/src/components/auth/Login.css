@@ -3,9 +3,7 @@ body {
 }
 
 .container {
-	border-style: double;
 	border-width: 5px;
-	border-color: #5F5F5F;
     box-sizing: border-box;
 	float: center;
 	width: 400px;
