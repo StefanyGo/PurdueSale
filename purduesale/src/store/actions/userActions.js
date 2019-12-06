@@ -24,10 +24,10 @@ export const getUsers = (users, contacts) => {
     if (users != null && typeof(users) !== 'undefined' ) {
         let i = 0;
         let j = 0;
-        for (i = 0; i < users.length; i++) {
-            for (j = 0; j < contacts.length; j++) {
-                if (users[i].id == contacts[j]) {
-                    let name = users[i].firstName + " " + users[i].lastName;
+        for (i = 0; i < contacts.length; i++) {
+            for (j = 0; j < users.length; j++) {
+                if (users[j].id == contacts[i]) {
+                    let name = users[j].firstName + " " + users[j].lastName;
                     names.push(name);
                 }
 
