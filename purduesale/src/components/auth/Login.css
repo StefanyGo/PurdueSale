@@ -74,8 +74,11 @@ button:hover {
 }
 
 .logobtn {
-	background-color: #DF4F4F;
+	background-color: transparent;
+    float: center;
+    background-image: url('../../logo.png');
 	float: center;
+
 }
 
 .post {
