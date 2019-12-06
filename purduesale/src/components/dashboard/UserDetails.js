@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import GiveRating from './GiveRating';
+import FollowButton from './FollowButton';
 
 const UserDetails = (props) => {
     const { user } = props;
@@ -14,15 +15,16 @@ const UserDetails = (props) => {
                         <span className="card-title">{user.firstName} {user.lastName}</span>
                         <p>{user.bio}</p>
                     </div>
+                    <FollowButton user={user}/>
+                    <br></br>
                     <div className="card-action grey lighten-4 grey-text">
                         <div>Email Address:</div>
                         <div>{user.email}</div>
                     </div>
                     <div className="card-action grey lighten-4 grey-text">
-                    <div>Rating:</div>
-                    <div>{user.totalOfRatings / user.totalNumberOfRatings}</div>
+                        <div>Rating:</div>
+                        <div>{user.totalOfRatings / user.totalNumberOfRatings}</div>
                     </div>
-                    
                     <GiveRating id={user.email} history={props.history}/>
                 </div>
             </div>
@@ -45,6 +47,7 @@ const mapStateToProps = (state, ownProps) => {
         user: user
     }
 } 
+
 
 
 export default compose(

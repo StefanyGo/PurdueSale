@@ -1,5 +1,7 @@
 export const editBio = (bio) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
+
+        console.log("editbioinside")
         const firebase = getFirebase();
         const firestore = getFirestore();
         const uid = firebase.auth().currentUser.uid;
@@ -32,6 +34,22 @@ export const giveRating = (rating) => {
         firestore.collection('users').doc(fields[4]).update({
             totalNumberOfRatings: doc.data().totalNumberOfRatings + 1,
             totalOfRatings: parseFloat(doc.data().totalOfRatings) + parseFloat(rating)
+        });
+    });
+    }
+}
+
+export const addFollower = (email) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        console.log("addFollowerinside")
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        const uid = firebase.auth().currentUser.uid;
+
+        firestore.collection('users').doc(uid).get().then(function(doc) { 
+        firestore.collection('users').doc(uid).update({
+            numFollowing: doc.data().numFollowing + 1,
+            following: [...doc.data().following, email]
         });
     });
     }
