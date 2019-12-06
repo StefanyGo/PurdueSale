@@ -55,6 +55,24 @@ export const addFollower = (email) => {
     }
 }
 
+export const removeFollower = (email) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        console.log("addFollowerinside")
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        const uid = firebase.auth().currentUser.uid;
+
+        firestore.collection('users').doc(uid).get().then(function(doc) { 
+        const elements = [...doc.data().following];
+        const results = elements.filter(element => element.indexOf(email));
+        firestore.collection('users').doc(uid).update({
+            numFollowing: doc.data().numFollowing - 1,
+            following: [...results]
+        });
+    });
+    }
+}
+
 export const addNewProduct = (newProduct) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
      const firebase = getFirebase();

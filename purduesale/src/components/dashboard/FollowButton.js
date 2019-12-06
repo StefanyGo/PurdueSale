@@ -2,6 +2,7 @@ import '../auth/Login.css';
 import React, { Component } from 'react';
 import Select from 'react-select'
 import { addFollower } from '../../store/actions/accountActions'
+import { removeFollower } from '../../store/actions/accountActions'
 import { connect } from 'react-redux'
 
 class FollowButton extends Component {
@@ -9,8 +10,16 @@ class FollowButton extends Component {
     follow = () => {
         console.log(this.props.user.email)
         if (this.props.user.email) {
-            console.log("here")
+            console.log("follow")
             this.props.addFollower(this.props.user.email)
+        }
+    }
+
+    unfollow = () => {
+        console.log(this.props.user.email)
+        if (this.props.user.email) {
+            console.log("unfollow")
+            this.props.removeFollower(this.props.user.email)
         }
     }
 
@@ -19,7 +28,7 @@ class FollowButton extends Component {
         let followbutton;
         if (isFollowing) {
             followbutton =  <div>
-                                <button> Unfollow </button>
+                                <button onClick={this.unfollow}> Unfollow </button>
                                 <div>You are following this person</div>
                             </div>
         } else {
@@ -44,7 +53,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addFollower: (email) => dispatch(addFollower(email))
+        addFollower: (email) => dispatch(addFollower(email)),
+        removeFollower: (email) => dispatch(removeFollower(email))
     }
 }
 
