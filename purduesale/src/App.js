@@ -3,6 +3,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
 import './App.css';
 
+import Sidebar from './components/navbar/Sidebar';
 import Navbar from './components/navbar/Navbar';
 import Login from './components/auth/Login.js';
 import Logout from './components/auth/Logout.js';
@@ -44,6 +45,7 @@ render() {
     <BrowserRouter>
       <div className="App">
         <Navbar />
+        <Sidebar />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/login' component={Login} />
