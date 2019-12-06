@@ -44,16 +44,16 @@ const Profile = (props) => {
         </div>
         <br/>
         <div style={{fontWeight: 'bold'}}>
-            Total of ratings is:
-        </div>
-        <div>
-            {props.profile.totalOfRatings / props.profile.totalNumberOfRatings}
-        </div>
-        <div style={{fontWeight: 'bold'}}>
-            Total number of ratings is:
+            Total number of ratings:
         </div>
         <div>
             {props.profile.totalNumberOfRatings}
+        </div>
+        <div style={{fontWeight: 'bold'}}>
+            Current rating:
+        </div>
+        <div>
+            {(props.profile.totalNumberOfRatings !== 0) ? (props.profile.totalOfRatings / props.profile.totalNumberOfRatings) : "None"}
         </div>
 
         <br></br>
