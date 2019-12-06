@@ -3,17 +3,24 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router-dom'
 import ProductList from './ProductList'
+import ResetPassword from '../auth/ResetPassword';
+import EditBio from '../auth/EditBio';
+import EditImgUrl from '../auth/EditImgUrl';
 
 const Settings = (props) => {
     const links = props.auth.uid ? 
     ( <div >
-        <span className="card-title">Settings</span>
+          <span className="card-title">Settings</span>
         <div >
-            Hi, {props.profile.firstName} {props.profile.lastName}!
+            hi, {props.profile.firstName} {props.profile.lastName}!
 
-            Change Password:
-            {props.profile.email}!
-        </div>    
+            <br/>
+            <div class="row" >
+                <div class="col"><ResetPassword/></div>
+                <div class="col"><EditBio/></div>
+                <div class="col"><EditImgUrl/></div>
+        </div>
+        </div>
     </div>
     ) 
     : 

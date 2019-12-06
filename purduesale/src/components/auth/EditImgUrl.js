@@ -65,15 +65,16 @@ class EditImgUrl extends Component {
     render() {
         return (
 			<div align="center">
-			  <button className="logobtn" onClick={this.redirectWelcome}></button>
 			    <div className="container" style={{width: "350px"}} align="left">
-			      <h2 style={{marginTop: "0px", marginBottom: "30px"}} align="center">Edit Image</h2>
+                <h6 align="center">Edit Profile Image </h6>
+                <br/>
                   {/*<img src={this.state.imgUrl || userlogo1} alt="Uploaded images" height="150" width="182" style={{float: "center"}}/>*/}
+                  <br/>
                   <input type="file" onChange={this.handleChange} />
-			      <br/><br/><br/>
-			      <button onClick={this.handleSubmit} type="submit" style={{width: "100%"}}>Update Image</button>
-			      <br/>
-			      <button onClick={this.deletePicture} type="submit" style={{width: "100%", backgroundImage: "linear-gradient(#DF4F4F, #9F2F2F)"}}>Remove Profile Picture</button>
+			      <br/><br/>
+			      <button onClick={this.handleSubmit} type="submit" >Update Image</button>
+                  <button className="cancelbtn" onClick={this.deletePicture} align="right">Remove</button>
+
 			    </div>
 			</div>
 
