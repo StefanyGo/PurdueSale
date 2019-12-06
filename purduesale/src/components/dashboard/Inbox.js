@@ -51,18 +51,20 @@ class Inbox extends Component {
             if (names != null) {
                 let j = 0;
                 let unreads = this.props.users.find(e => e.id === auth.uid).unreads;
-            
-                for (j = 0; j < this.state.contacts.length; j++) {
+                let k = this.state.contacts.length -1;
+                for (j = 0; j < this.state.contacts.length && k > -1; j++, k--) {
                     let contact = this.state.contacts[j];
-                    let name = names[j];
+                    let name = names[k];
                     let isUnread = false;
                     if (unreads.includes(contact.toString())) {
                         isUnread = true;
                     }
 
-                    out.push( <div style={{marginTop: "8px", marginBottom: "8px"}} key={contact.toString()} className="inbox-list" align="left">
-                        <Link to={'/messages/' + contact.toString()}><b style={isUnread ? {color: "black", fontStyle: "italic"} : {color: "black"}}>{isUnread ? ("(!) " + name + " (!)") : name}</b></Link>
+                    out.push( <div style={{marginTop: "8px", marginBottom: "8px"}} key={this.state.contacts[k].toString()} className="inbox-list" align="left">
+                        <Link to={'/messages/' + this.state.contacts[k].toString()}><b style={isUnread ? {color: "black", fontStyle: "italic"} : {color: "black"}}>{isUnread ? ("(!) " + name + " (!)") : name}</b></Link>
                     </div> )
+
+                    contact = "";
                 }
             }
             
