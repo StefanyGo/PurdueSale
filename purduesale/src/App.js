@@ -23,6 +23,8 @@ import EditImgUrl from './components/auth/EditImgUrl';
 import GiveRating from './components/dashboard/GiveRating';
 import Home from './components/dashboard/Home'
 import MyProducts from './components/dashboard/MyProducts';
+import Settings from './components/dashboard/Settings';
+import Inbox from './components/dashboard/Inbox';
 import Messaging from './components/dashboard/Messaging';
 import SubscribedProducts from './components/dashboard/SubscribedProducts';
 
@@ -66,6 +68,8 @@ render() {
           <Route path='/product/:id' component={ProductDetails} />
           <Route path='/messages/:id' component={Messaging} />
           <Route path='/rate' component={GiveRating}/>
+          <Route path='/settings' component={Settings}/>
+          <Route path='/inbox' component={Inbox}/>
         </Switch>
       </div>
     </BrowserRouter>

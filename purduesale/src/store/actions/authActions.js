@@ -69,7 +69,9 @@ export const signUp = (newUser) => {
                         numFollowing: 0,
                         numFollowers: 0,
                         followers: [],
-                        following: []
+                        following: [],
+                        unreads: [],
+                        unreadsSize: 0
                     })
                 }).then(() => {
                     dispatch({ type: 'SIGNUP_SUCCESS' })
@@ -101,7 +103,9 @@ export const signUp = (newUser) => {
                         numFollowing: 0,
                         numFollowers: 0,
                         followers: [],
-                        following: []
+                        following: [],
+                        unreads: [],
+                        unreadsSize: 0,
                     })
                 }).then(() => { 
                     dispatch({ type: 'SIGNUP_SUCCESS' })
