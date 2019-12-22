@@ -144,11 +144,11 @@ class Messaging extends Component {
                             AMPM = " PM";
                             hours -= 12;
                         }
-                        else if (hours === 0) {
+                        if (hours === 0) {
                             hours = 12;
                         }
 
-                        readDate = "Seen: " + hours + ":" + tmp.getMinutes() + AMPM + " on " + (tmp.getMonth()+1) + "/" + (tmp.getDay()+1) + "/" + tmp.getFullYear();
+                        readDate = "Seen: " + hours + ":" + tmp.getMinutes() + AMPM + " on " + (tmp.getMonth()+1) + "/" + (tmp.getDate()) + "/" + tmp.getFullYear();
                         console.log(readDate);
 
                     }
